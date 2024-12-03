@@ -1,0 +1,16 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "CMS Code.json Metadata",
+	"description": "A metadata standard for software repositories of CMS",
+	"type": "object",
+	"properties": {
+		"name": {
+			"type": "string",
+			"description": "Name of the project or software"
+		},
+		"softwareDescription": {
+			"type": "string",
+			"description": "project description here"
+		}
+	}
+}

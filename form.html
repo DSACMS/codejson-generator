@@ -1,0 +1,58 @@
+<html>
+	<head>
+		<!-- USWDS not working -->
+		<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+		<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+		<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uswds/2.11.2/css/uswds.min.css"> -->
+		<!-- <link rel="stylesheet" href="https://cdn.form.io/formiojs/formio.form.min.css"> -->
+		<!-- <link rel="stylesheet" href="https://cdn.form.io/uswds/uswds.min.css"> -->
+		<!-- <link rel="stylesheet" href="https://unpkg.com/formiojs@3.0.0-alpha.13/dist/formio.full.min.css"> -->
+		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/uswds/2.11.2/js/uswds.min.js"></script> -->
+		<!-- <script src="https://cdn.form.io/formiojs/formio.form.min.js"></script> -->
+		<!-- <script src="https://cdn.form.io/uswds/uswds.min.js"></script> -->
+		<!-- <script src="https://cdn.form.io/formiojs/formio.full.js"></script> -->
+		<!-- <script src="https://cdn.form.io/js/formio.embed.js"></script> -->
+
+		<!-- Uses bootstrap for now -->
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css"
+		/>
+
+		<!-- Working Form.io CDN -->
+		<script src="https://unpkg.com/formiojs@3.0.0-alpha.13/dist/formio.full.min.js"></script>
+	</head>
+	<body>
+		<div id="formio"></div>
+		<script src="js/generateFormComponents.js"></script>
+		<script src="js/formDataToJson.js"></script>
+		<script type="text/javascript">
+			createFormComponents()
+				.then((components) => {
+					Formio.createForm(document.getElementById("formio"), {
+						display: "form",
+						theme: "primary",
+						settings: {
+							pdf: {
+								id: "1ec0f8ee-6685-5d98-a847-26f67b67d6f0",
+								src: "https://files.form.io/pdf/5692b91fd1028f01000407e3/file/1ec0f8ee-6685-5d98-a847-26f67b67d6f0",
+							},
+						},
+						components: components,
+					}).then(function (form) {
+						form.on("submit", function (submission) {
+							console.log("form submission here:", submission);
+							downloadFile(submission.data);
+						});
+					});
+				})
+				.catch((error) => {
+					console.error("Error creating components:", error);
+				});
+		</script>
+	</body>
+</html>
