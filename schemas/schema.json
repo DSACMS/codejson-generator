@@ -1,0 +1,43 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "CMS Code.json Metadata",
+	"description": "A metadata standard for software repositories of CMS",
+	"type": "object",
+	"properties": {
+		"name": {
+			"type": "string",
+			"description": "Name of the project or software"
+		},
+		"softwareDescription": {
+			"type": "string",
+			"description": "project description here"
+		},
+		"status": {
+			"type": "string",
+			"enum": [
+				"Ideation",
+				"Development",
+				"Alpha",
+				"Beta",
+				"Release Candidate",
+				"Production",
+				"Archival"
+			],
+			"description": "Development status of the project"
+		},
+		"organization": {
+			"type": "string",
+			"description": "Organization responsible for the project",
+			"enum": ["Centers for Medicare & Medicaid Services"]
+		},
+		"vcs": {
+			"type": "string",
+			"description": "Version control system used",
+			"enum": ["git", "hg", "svn", "rcs", "bzr"]
+		},
+		"laborHours": {
+			"type": "number",
+			"description": "Labor hours invested in the project"
+		}
+	}
+}
