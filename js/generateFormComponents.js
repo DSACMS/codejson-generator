@@ -24,12 +24,14 @@ function transformArrayToOptions(arr) {
 
 function determineType(field) {
 	if (field.type === "array") {
-		// TODO: Implement multi-select fields
+		// Multi-select
 		if (field.items.hasOwnProperty("enum")) {
 			return "selectboxes";
 		}
-		return "array-textfield";
+		// Free response list
+		return "tags";
 	} else if (field.hasOwnProperty("enum")) {
+		// Single select
 		return "radio";
 	} else if (field.type === "number") {
 		return "number";
@@ -50,6 +52,17 @@ function createComponent(fieldName, fieldObject) {
 				input: true,
 				tooltip: fieldObject["description"],
 				description: fieldObject["description"],
+			};
+		case "tags":
+			return {
+				label: fieldName,
+				tableView: false,
+				storeas: "array",
+				validateWhenHidden: false,
+				key: fieldName,
+				type: "tags",
+				input: true,
+				description: fieldObject["description"]
 			};
 		case "number":
 			return {
@@ -80,6 +93,22 @@ function createComponent(fieldName, fieldObject) {
 				key: fieldName,
 				type: "radio",
 				input: true,
+				description: fieldObject["description"]
+			};
+		case "selectboxes":
+			var options = transformArrayToOptions(fieldObject.items.enum);
+			console.log("checking options here:", options);
+			return {
+				label: fieldName,
+				optionsLabelPosition: "right",
+				tableView: false,
+				values: options,
+				validateWhenHidden: false,
+				key: fieldName,
+				type: "selectboxes",
+				input: true,
+				inputType: "checkbox",
+				description: fieldObject["description"]
 			};
 		default:
 			break;

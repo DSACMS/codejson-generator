@@ -16,20 +16,41 @@ async function retrieveFile(filePath) {
 
 // Populates blank code.json object with values from form
 function populateObject(data, blankObject) {
-	for (let key in data) {
-		console.log("current key", key);
-		console.log("check if value exists", data.hasOwnProperty(key));
+
+	for (const key in data) {
 		if (blankObject.hasOwnProperty(key)) {
-			if (typeof data[key] === "object" && data[key] !== null) {
-				// If object, recursively populate
-				// TODO: test out for permissions and description objects
-				populateObject(data[key], blankObject[key]);
-			} else {
-				// Add value
+			console.log(`${key}: ${data[key]}`);
+
+			if(typeof data[key] === "object" && isMultiSelect(data[key])) {
+				blankObject[key] = getSelectedOptions(data[key]);
+			}
+			else {
 				blankObject[key] = data[key];
 			}
+			
 		}
 	}
+}
+
+function isMultiSelect(obj) {
+	  for (const key in obj) {
+		if (typeof obj[key] !== 'boolean') {
+		  return false;
+		}
+	  }
+	  return true; // Return true if all values are booleans
+}
+
+// Convert from dictionary to array
+function getSelectedOptions(options) {
+	let selectedOptions = [];
+
+	for (let key in options) {
+		if(options[key]) {
+			selectedOptions.push(key);
+		}
+	}
+	return selectedOptions;
 }
 
 async function populateCodeJson(data) {

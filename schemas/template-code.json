@@ -4,5 +4,10 @@
 	"status": "",
 	"organization": "",
 	"vcs": "",
-	"laborHours": 0
+	"laborHours": 0,
+	"platforms": [""],
+	"categories": [""],
+	"softwareType": [""],
+	"languages": [""],
+	"maintenance": ""
 }

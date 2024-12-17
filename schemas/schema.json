@@ -38,6 +38,48 @@
 		"laborHours": {
 			"type": "number",
 			"description": "Labor hours invested in the project"
+		},
+		"platforms": {
+			"type": "array",
+			"description": "Platforms supported by the project",
+			"items": {
+				"type": "string",
+				"enum": ["web", "windows", "mac", "linux", "ios", "android", "other"]
+			}
+		},
+		"categories": {
+			"type": "array",
+			"description": "Categories the project belongs to. Select from: https://yml.publiccode.tools/categories-list.html",
+			"items": {
+				"type": "string"
+			}
+		},
+		"softwareType": {
+			"type": "string",
+			"description": "Type of software",
+			"enum": [
+				"standalone/mobile",
+				"standalone/iot",
+				"standalone/desktop",
+				"standalone/web",
+				"standalone/backend",
+				"standalone/other",
+				"addon",
+				"library",
+				"configurationFiles"
+			]
+		},
+		"languages": {
+			"type": "array",
+			"description": "Programming languages that make up the codebase",
+			"items": {
+				"type": "string"
+			}
+		},
+		"maintenance": {
+			"type": "string",
+			"description": "Maintenance status",
+			"enum": ["internal", "contract", "community", "none"]
 		}
 	}
 }
