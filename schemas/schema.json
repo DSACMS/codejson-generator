@@ -80,6 +80,15 @@
 			"type": "string",
 			"description": "Maintenance status",
 			"enum": ["internal", "contract", "community", "none"]
+		},
+		"lastModified": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date when the project was last modified"
+        },
+		"localisation": {
+			"type": "boolean",
+			"description": "Indicates if the project supports multiple languages"
 		}
 	}
 }

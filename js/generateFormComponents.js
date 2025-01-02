@@ -35,7 +35,12 @@ function determineType(field) {
 		return "radio";
 	} else if (field.type === "number") {
 		return "number";
+	} else if (field.type === "boolean"){
+		return "select-boolean";
 	} else if (field.type === "string") {
+		if (field.format == "date-time") {
+			return "datetime";
+		}
 		return "textfield";
 	}
 }
@@ -110,6 +115,63 @@ function createComponent(fieldName, fieldObject) {
 				inputType: "checkbox",
 				description: fieldObject["description"]
 			};
+		case "datetime":
+			return {
+				"label": fieldName,
+				"tableView": false,
+				"datePicker": {
+					"disableWeekends": false,
+					"disableWeekdays": false
+				},
+				"enableMinDateInput": false,
+				"enableMaxDateInput": false,
+				"validateWhenHidden": false,
+				"key": fieldName,
+				"type": "datetime",
+				"input": true,
+				"widget": {
+					"type": "calendar",
+					"displayInTimezone": "viewer",
+					"locale": "en",
+					"useLocaleSettings": false,
+					"allowInput": true,
+					"mode": "single",
+					"enableTime": true,
+					"noCalendar": false,
+					"format": "yyyy-MM-dd hh:mm a",
+					"hourIncrement": 1,
+					"minuteIncrement": 1,
+					"time_24hr": false,
+					"minDate": null,
+					"disableWeekends": false,
+					"disableWeekdays": false,
+					"maxDate": null
+				},
+				description: fieldObject["description"]
+			}
+		case "select-boolean":
+			return {
+				"label": fieldName,
+				"widget": "html5",
+				"tableView": true,
+				"data": {
+					"values": [
+						{
+							"label": "True",
+							"value": "true"
+						},
+						{
+							"label": "False",
+							"value": "false"
+						}
+					]
+				},
+				"validateWhenHidden": false,
+				"key": fieldName,
+				"type": "select",
+				"input": true,
+				description: fieldObject["description"]
+			}
 		default:
 			break;
 	}
