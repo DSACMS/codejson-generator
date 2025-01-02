@@ -115,6 +115,11 @@ function createComponent(fieldName, fieldObject) {
 	}
 }
 
+function createFormHeading(title, description) {
+	const container = document.getElementById('form-header');
+	container.innerHTML = `<h1>${title}</h1>\n<h2>${description}</h2>`;
+}
+
 // Iterates through each json field and creates component array for Form.io
 async function createFormComponents() {
 	let components = [];
@@ -123,6 +128,8 @@ async function createFormComponents() {
 	const filePath = "schemas/schema.json";
 	let jsonData = await retrieveFile(filePath);
 	console.log("JSON Data:", jsonData);
+
+	createFormHeading(jsonData["title"], jsonData["description"]);
 
 	formFields = jsonData["properties"];
 	console.log("form Fields:", formFields);
