@@ -1,25 +1,25 @@
 <html>
 	<head>
-		<!-- USWDS not working -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
 		<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-		<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-		<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uswds/2.11.2/css/uswds.min.css"> -->
 		<!-- <link rel="stylesheet" href="https://cdn.form.io/formiojs/formio.form.min.css"> -->
 		<!-- <link rel="stylesheet" href="https://cdn.form.io/uswds/uswds.min.css"> -->
-		<!-- <link rel="stylesheet" href="https://unpkg.com/formiojs@3.0.0-alpha.13/dist/formio.full.min.css"> -->
-		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/uswds/2.11.2/js/uswds.min.js"></script> -->
-		<!-- <script src="https://cdn.form.io/formiojs/formio.form.min.js"></script> -->
-		<!-- <script src="https://cdn.form.io/uswds/uswds.min.js"></script> -->
-		<!-- <script src="https://cdn.form.io/formiojs/formio.full.js"></script> -->
-		<!-- <script src="https://cdn.form.io/js/formio.embed.js"></script> -->
-
-		<!-- Uses bootstrap for now -->
-		<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+		<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/formiojs@4.21.6/dist/formio.full.min.css"> -->
+		<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+		<!-- <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'> -->
+		<!-- <script src="https://cdn.form.io/uswds/uswds.min.js" defer></script> -->
+		<!-- <script src="https://cdn.form.io/formiojs/formio.form.min.js" defer></script> -->
+		<!-- <script src="https://cdn.form.io/formiojs/formio.full.js" defer></script> -->
+		<!-- <script src="https://cdn.form.io/js/formio.embed.js" defer></script> -->
+		
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uswds/3.7.0/css/uswds.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uswds/3.7.0/fonts/fonts.css">
+		<link rel="stylesheet" href="https://unpkg.com/formiojs@4.21.6/dist/formio.full.min.css">
 		<link rel="stylesheet" href="css/styles.css">
-
-		<!-- Working Form.io CDN -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/uswds/3.7.0/js/uswds.min.js" defer></script>
 		<script src="https://unpkg.com/formiojs@4.21.6/dist/formio.full.min.js"></script>
-		<link href="https://cdn.jsdelivr.net/npm/formiojs@4.21.6/dist/formio.full.min.css" rel="stylesheet">
 
 		<!-- Render the form -->
 		<script src="js/generateFormComponents.js"></script>
@@ -52,11 +52,11 @@
 	<body>
 		<div id="form-header"></div>
 		<div id="formio"></div>
-		<div id="output">
+		<div id="output" class="margin-top-3">
 			<label for="json-result">Your JSON Metadata </label>
-        	<textarea class="form-control" rows="10" id="json-result" readonly></textarea>
-			<button type="button" class="btn btn-outline" href="#" onclick="copyToClipboard(event)">Copy</button>
-			<button type="button" class="btn btn-outline" href="#" onclick="downloadFile(event)">Download</button>
+        	<textarea class="form-control usa-textarea" rows="10" id="json-result" readonly></textarea>
+			<button type="button" class="btn btn-outline usa-button" href="#" onclick="copyToClipboard(event)">Copy</button>
+			<button type="button" class="btn btn-outline usa-button" href="#" onclick="downloadFile(event)">Download</button>
 		</div>
 	</body>
 </html>
