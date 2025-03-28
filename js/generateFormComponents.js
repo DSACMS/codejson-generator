@@ -302,6 +302,15 @@ async function createFormComponents() {
 
 	components = createAllComponents(jsonData);
 
+	components.push({
+		"label": "GitHub API Key (optional)",
+		"disableSortingAndFiltering": false,
+		"tableView": true,
+		"key": "gh_api_key",
+		"type": "textfield",
+		"input": true
+	});
+
 	// Add submit button to form
 	components.push({
 		type: "button",
@@ -311,6 +320,8 @@ async function createFormComponents() {
 		input: true,
 		tableView: false,
 	});
+
+	
 
 	console.log(components);
 
