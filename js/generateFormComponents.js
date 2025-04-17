@@ -302,6 +302,20 @@ async function createFormComponents() {
 
 	components = createAllComponents(jsonData);
 
+	//Form text box to input GitHub API Key
+	components.push({
+		"label": "GitHub API Key (optional)",
+		"disableSortingAndFiltering": false,
+		"tableView": true,
+		"key": "gh_api_key",
+		"type": "password",
+		"input": true,
+		"description": "Generate a Github API Key from here: https://github.com/settings/tokens/new .\n\
+			The token should have these permissions: \n\
+			- Contents: read &write \n- Workflows: read & write\
+			- Pull requests: read & write"
+	});
+
 	// Add submit button to form
 	components.push({
 		type: "button",
@@ -311,6 +325,8 @@ async function createFormComponents() {
 		input: true,
 		tableView: false,
 	});
+
+	
 
 	console.log(components);
 
