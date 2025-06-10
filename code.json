@@ -1,7 +1,7 @@
 {
   "name": "codejson-generator",
   "description": "Form to generate a CMS code.json",
-  "longDescription": "A web form where project teams fill out information about their project and creates a completed code.json for local download to add to repositories.",
+  "longDescription": "A web form where teams fill out information about their project and creates a completed code.json to add to repositories.",
   "status": "Production",
   "permissions": {
     "license": [
@@ -15,8 +15,15 @@
   },
   "organization": "Centers for Medicare & Medicaid Services",
   "repositoryURL": "https://github.com/DSACMS/codejson-generator",
+  "projectURL": "https://dsacms.github.io/codejson-generator/",
+  "repositoryHost": "github.com/DSACMS",
+  "repositoryVisibility": "public",
   "vcs": "git",
-  "laborHours": 3347,
+  "laborHours": 3702,
+  "reuseFrequency": {
+    "forks": 7,
+    "clones": 0
+  },
   "platforms": [
     "web"
   ],
@@ -32,31 +39,39 @@
     "CSS"
   ],
   "maintenance": "internal",
+  "contractNumber": "",
   "date": {
     "created": "2024-11-22T16:30:29Z",
-    "lastModified": "2025-02-13T20:05:39Z",
-    "metaDataLastUpdated": "2025-02-14T15:06:13.678Z"
+    "lastModified": "2025-06-06T17:26:23Z",
+    "metaDataLastUpdated": "2025-06-10T17:22:19.981Z"
   },
   "tags": [
     "codejson",
     "compliance",
-    "OSPO"
+    "OSPO",
+    "metadata",
+    "featured"
   ],
   "contact": {
     "email": "opensource@cms.hhs.gov",
     "name": "CMS Open Source Team"
   },
+  "feedbackMechanisms": [
+    "https://github.com/DSACMS/codejson-generator/issues"
+  ],
   "localisation": false,
   "repositoryType": "website",
-  "userInput": false,
+  "userInput": true,
   "fismaLevel": "Low",
   "group": "CMS/OA/DSAC",
+  "projects": [],
+  "systems": [],
+  "upstream": "https://github.com/DSACMS/codejson-generator/network/dependencies",
   "subsetInHealthcare": [
     "Operational"
   ],
   "userType": [
     "Government"
   ],
-  "repositoryHost": "github.com/DSACMS",
   "maturityModelTier": 3
 }
