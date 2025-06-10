@@ -1,7 +1,7 @@
 {
   "name": "codejson-generator",
   "description": "Form to generate a CMS code.json",
-  "longDescription": "A web form where project teams fill out information about their project and creates a completed code.json for local download to add to repositories.",
+  "longDescription": "A web form where teams fill out information about their project and creates a completed code.json to add to repositories.",
   "status": "Production",
   "permissions": {
     "license": [
@@ -15,13 +15,13 @@
   },
   "organization": "Centers for Medicare & Medicaid Services",
   "repositoryURL": "https://github.com/DSACMS/codejson-generator",
-  "projectURL": "",
+  "projectURL": "https://dsacms.github.io/codejson-generator/",
   "repositoryHost": "github.com/DSACMS",
-  "repositoryVisibility": "",
+  "repositoryVisibility": "public",
   "vcs": "git",
   "laborHours": 3702,
   "reuseFrequency": {
-    "forks": 0,
+    "forks": 7,
     "clones": 0
   },
   "platforms": [
@@ -48,7 +48,9 @@
   "tags": [
     "codejson",
     "compliance",
-    "OSPO"
+    "OSPO",
+    "metadata",
+    "featured"
   ],
   "contact": {
     "email": "opensource@cms.hhs.gov",
@@ -59,12 +61,12 @@
   ],
   "localisation": false,
   "repositoryType": "website",
-  "userInput": false,
+  "userInput": true,
   "fismaLevel": "Low",
   "group": "CMS/OA/DSAC",
   "projects": [],
   "systems": [],
-  "upstream": "",
+  "upstream": "https://github.com/DSACMS/codejson-generator/network/dependencies",
   "subsetInHealthcare": [
     "Operational"
   ],
