@@ -208,7 +208,13 @@ async function preFillFields(repoData, languages) {
 
         // Updating URL
         if (repoData.html_url) {
-            form.getComponent('repositoryURL').setValue(repoData.html_url)
+            if (repoData.private) {
+                // Private repositories must have "private" as their repositoryURL value
+                form.getComponent('repositoryURL').setValue("private")
+            }
+            else {
+                form.getComponent('repositoryURL').setValue(repoData.html_url)
+            }
         }
 
         // Updating forks
@@ -306,11 +312,11 @@ async function preFillFields(repoData, languages) {
         }
 
         // fields to potentially automate
-            // clones, but this is only tracked for every 14 days 
-            // status, by checking if its public, we can assume its production and check if its archival 
-            // laborHours, by running a script? this might be harder since we need SCC
-            // maturityModel, we could check to see if certain files / sections live within a repo and make a guess like that
-            // usageType, by assuming that if its public = openSource and if private = governmnetWideReuse
+        // clones, but this is only tracked for every 14 days 
+        // status, by checking if its public, we can assume its production and check if its archival 
+        // laborHours, by running a script? this might be harder since we need SCC
+        // maturityModel, we could check to see if certain files / sections live within a repo and make a guess like that
+        // usageType, by assuming that if its public = openSource and if private = governmnetWideReuse
 
         notificationSystem.success("Repository data loaded successfully!")
 
