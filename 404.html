@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="refresh" content="0; url=/?page=">
+    <script>
+        // Extract the path from URL (e.g., /cms) and redirect
+        (function () {
+            const repoName = "codejson-generator"; // change if needed
+            const pages = ["gov", "cms"];
+            const path = window.location.pathname.replace(`/${repoName}`, "").replace(/^\/+/, "").replace(/\/$/, "");
+            const redirectPage = pages.includes(path);
+            if (redirectPage) {
+                var newUrl = `/${repoName ? repoName + "/" : ""}?page=${encodeURIComponent(path)}`;
+                window.location.replace(newUrl);
+            }
+        })();
+    </script>
+</head>
+
+<body>
+    <p>Page not found.</p>
+</body>
+
+</html>
