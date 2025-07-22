@@ -302,7 +302,10 @@ function createAllComponents(schema, prefix = "") {
 async function createFormComponents() {
 	let components = [];
 
-	const filePath = "schemas/schema.json";
+	// Fetching schema based on search params
+	const params = new URLSearchParams(window.location.search);
+	const page = params.get("page") || "gov";
+	const filePath = `schemas/${page}/schema.json`;
 	const jsonData = await retrieveFile(filePath);
 	console.log("JSON Data:", jsonData);
 
