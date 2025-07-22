@@ -23,7 +23,7 @@ function transformArrayToOptions(arr) {
 }
 
 // Function that handles validation object needed for each form component
-function determineValidation(fieldName, fieldObject, requiredArray){
+function determineValidation(fieldName, fieldObject, requiredArray) {
 	return {
 		"required": requiredArray.includes(fieldName)
 	}
@@ -207,7 +207,7 @@ function createComponent(fieldName, fieldObject, requiredArray) {
 				description: fieldObject["description"],
 				validate
 			};
-		case "container": 
+		case "container":
 			return {
 				label: fieldName,
 				hideLabel: false,
@@ -238,7 +238,7 @@ function createComponent(fieldName, fieldObject, requiredArray) {
 				input: true,
 				components: [],
 				validate
-			}; 
+			};
 		default:
 			break;
 	}
@@ -256,20 +256,20 @@ function createAutoGenerationBox() {
 }
 
 // Iterates through each json field and creates component array for Form.io
-function createAllComponents(schema, prefix = ""){
+function createAllComponents(schema, prefix = "") {
 	let components = [];
 
 	if (schema.type === "object" && schema.properties) {
 
 		const items = schema.properties.hasOwnProperty("items") ? schema.properties.items : schema.properties;
-		
+
 		let requiredArray = [];
 		if (schema.hasOwnProperty("required")) {
 			requiredArray = schema.required;
 		}
 
-        for (const [key, value] of Object.entries(items)) {
-            
+		for (const [key, value] of Object.entries(items)) {
+
 			console.log("key at play:", key);
 			const fullKey = prefix ? `${prefix}.${key}` : key;
 
@@ -277,23 +277,26 @@ function createAllComponents(schema, prefix = ""){
 
 			if (fieldComponent.type === "container") {
 				fieldComponent.components = createAllComponents(value, fullKey);
-			} 
+			}
 			else if (fieldComponent.type === "datagrid") {
 				fieldComponent.components = createAllComponents(value.items, fullKey);
 			}
 
 			components.push(fieldComponent);
-        }
-    }
+		}
+	}
 
-    return components;
+	return components;
 }
 
 // Creates complete form based on input json schema
 async function createFormComponents() {
 	let components = [];
 
-	const filePath = "schemas/schema.json";
+	// Fetching schema based on search params
+	const params = new URLSearchParams(window.location.search);
+	const page = params.get("page") || "gov";
+	const filePath = `schemas/${page}/schema.json`;
 	const jsonData = await retrieveFile(filePath);
 	console.log("JSON Data:", jsonData);
 
@@ -326,7 +329,7 @@ async function createFormComponents() {
 		tableView: false,
 	});
 
-	
+
 
 	console.log(components);
 
