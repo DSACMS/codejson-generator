@@ -23,13 +23,13 @@
             "status": {
                 "type": "string",
                 "enum": [
-                    "Ideation",
-                    "Development",
-                    "Alpha",
-                    "Beta",
-                    "Release Candidate",
-                    "Production",
-                    "Archival"
+                    "ideation",
+                    "development",
+                    "alpha",
+                    "beta",
+                    "releaseCandidate",
+                    "production",
+                    "archival"
                 ],
                 "description": "Development status of the project"
             },
