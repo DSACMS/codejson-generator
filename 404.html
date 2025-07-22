@@ -11,7 +11,6 @@
             const path = window.location.pathname.replace(`/${repoName}`, "").replace(/^\/+/, "").replace(/\/$/, "");
             const redirectPage = pages.includes(path);
             if (redirectPage) {
-                console.log(redirectPage, "redirectPage")
                 var newUrl = `/${repoName ? repoName + "/" : ""}?page=${encodeURIComponent(path)}`;
                 window.location.replace(newUrl);
             }
