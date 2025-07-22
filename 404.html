@@ -7,17 +7,19 @@
         // Extract the path from URL (e.g., /cms) and redirect
         (function () {
             const repoName = "codejson-generator"; // change if needed
-            let path = window.location.pathname.replace(`/${repoName}`, "").replace(/^\/+/, "").replace(/\/$/, "");
-            const newUrl = path
-                ? `/${repoName ? repoName + "/" : ""}?page=${encodeURIComponent(path)}`
-                : `/${repoName ? repoName + "/" : ""}`;
-            window.location.replace(newUrl);
+            const pages = ["gov", "cms"];
+            const path = window.location.pathname.replace(`/${repoName}`, "").replace(/^\/+/, "").replace(/\/$/, "");
+            const redirectPage = pages.includes(path);
+            if (redirectPage) {
+                var newUrl = `/${repoName ? repoName + "/" : ""}?page=${encodeURIComponent(path)}`;
+                window.location.replace(newUrl);
+            }
         })();
     </script>
 </head>
 
 <body>
-    <p>Redirecting...</p>
+    <p>Page not found.</p>
 </body>
 
 </html>
