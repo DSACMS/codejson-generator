@@ -14,25 +14,6 @@
                 "description": "A short description of the project. It should be a single line containing a single sentence. Maximum 150 characters are allowed.",
                 "maxLength": 150
             },
-            "longDescription": {
-                "type": "string",
-                "description": "Provide longer description of the software, between 150 and 10000 chars. It is meant to provide an overview of the capabilities of the software for a potential user.",
-                "minLength": 150,
-                "maxLength": 10000
-            },
-            "status": {
-                "type": "string",
-                "enum": [
-                    "ideation",
-                    "development",
-                    "alpha",
-                    "beta",
-                    "releaseCandidate",
-                    "production",
-                    "archival"
-                ],
-                "description": "Development status of the project"
-            },
             "permissions": {
                 "type": "object",
                 "description": "An object containing description of the usage/restrictions regarding the release",
@@ -104,13 +85,6 @@
                     "usageType"
                 ]
             },
-            "organization": {
-                "type": "string",
-                "description": "Organization responsible for the project",
-                "enum": [
-                    "Centers for Medicare & Medicaid Services"
-                ]
-            },
             "repositoryURL": {
                 "type": "string",
                 "format": "uri",
@@ -123,17 +97,6 @@
                     "private"
                 ],
                 "description": "Visibility of repository"
-            },
-            "vcs": {
-                "type": "string",
-                "description": "Version control system used",
-                "enum": [
-                    "git",
-                    "hg",
-                    "svn",
-                    "rcs",
-                    "bzr"
-                ]
             },
             "laborHours": {
                 "type": "number",
@@ -152,51 +115,6 @@
                 },
                 "additionalProperties": true
             },
-            "platforms": {
-                "type": "array",
-                "description": "Platforms supported by the project",
-                "items": {
-                    "type": "string",
-                    "enum": [
-                        "web",
-                        "windows",
-                        "mac",
-                        "linux",
-                        "ios",
-                        "android",
-                        "other"
-                    ]
-                }
-            },
-            "categories": {
-                "type": "array",
-                "description": "Categories the project belongs to. Select from: https://yml.publiccode.tools/categories-list.html",
-                "items": {
-                    "type": "string"
-                }
-            },
-            "softwareType": {
-                "type": "string",
-                "description": "Type of software",
-                "enum": [
-                    "standalone/mobile",
-                    "standalone/iot",
-                    "standalone/desktop",
-                    "standalone/web",
-                    "standalone/backend",
-                    "standalone/other",
-                    "addon",
-                    "library",
-                    "configurationFiles"
-                ]
-            },
-            "languages": {
-                "type": "array",
-                "description": "Programming languages that make up the codebase",
-                "items": {
-                    "type": "string"
-                }
-            },
             "maintenance": {
                 "type": "string",
                 "description": "The dedicated staff that keeps the software up-to-date, if any",
@@ -210,27 +128,6 @@
             "contractNumber": {
                 "type": "string",
                 "description": "Contract number"
-            },
-            "date": {
-                "type": "object",
-                "description": "A date object describing the release",
-                "properties": {
-                    "created": {
-                        "type": "string",
-                        "format": "date-time",
-                        "description": "Creation date of project."
-                    },
-                    "lastModified": {
-                        "type": "string",
-                        "format": "date-time",
-                        "description": "Date when the project was last modified"
-                    },
-                    "metaDataLastUpdated": {
-                        "type": "string",
-                        "format": "date-time",
-                        "description": "Date when metadata was last updated"
-                    }
-                }
             },
             "tags": {
                 "type": "array",
@@ -261,9 +158,9 @@
                     "type": "string"
                 }
             },
-            "localisation": {
+            "AIUseCaseInventory": {
                 "type": "boolean",
-                "description": "Indicates if the project supports multiple languages"
+                "description": "Is the software included in the agency's AI use case inventory?"
             }
         }
     },
@@ -271,25 +168,18 @@
         "name",
         "description",
         "longDescription",
-        "status",
         "permissions",
-        "organization",
         "repositoryURL",
         "repositoryVisibility",
-        "vcs",
         "laborHours",
         "reuseFrequency",
-        "platforms",
-        "categories",
-        "softwareType",
         "languages",
         "maintenance",
         "contractNumber",
-        "date",
         "tags",
         "contact",
         "feedbackMechanisms",
-        "localisation"
+        "AIUseCaseInventory"
     ],
     "additionalProperties": false
 }
