@@ -1,85 +1,191 @@
 <html>
-	<head>
-		<meta charset="utf-8">
-		<!-- USWDS not working -->
-		<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-		<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-		<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uswds/2.11.2/css/uswds.min.css"> -->
-		<!-- <link rel="stylesheet" href="https://cdn.form.io/formiojs/formio.form.min.css"> -->
-		<!-- <link rel="stylesheet" href="https://cdn.form.io/uswds/uswds.min.css"> -->
-		<!-- <link rel="stylesheet" href="https://unpkg.com/formiojs@3.0.0-alpha.13/dist/formio.full.min.css"> -->
-		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/uswds/2.11.2/js/uswds.min.js"></script> -->
-		<!-- <script src="https://cdn.form.io/formiojs/formio.form.min.js"></script> -->
-		<!-- <script src="https://cdn.form.io/uswds/uswds.min.js"></script> -->
-		<!-- <script src="https://cdn.form.io/formiojs/formio.full.js"></script> -->
-		<!-- <script src="https://cdn.form.io/js/formio.embed.js"></script> -->
 
-		<link rel="icon" type="image/x-icon" href="favicon.ico">
-		
-		<!-- Uses bootstrap for now -->
-		<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
-		<link rel="stylesheet" href="css/styles.css">
+<head>
+	<meta charset="utf-8">
+	<!-- USWDS not working -->
+	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+	<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uswds/2.11.2/css/uswds.min.css"> -->
+	<!-- <link rel="stylesheet" href="https://cdn.form.io/formiojs/formio.form.min.css"> -->
+	<!-- <link rel="stylesheet" href="https://cdn.form.io/uswds/uswds.min.css"> -->
+	<!-- <link rel="stylesheet" href="https://unpkg.com/formiojs@3.0.0-alpha.13/dist/formio.full.min.css"> -->
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/uswds/2.11.2/js/uswds.min.js"></script> -->
+	<!-- <script src="https://cdn.form.io/formiojs/formio.form.min.js"></script> -->
+	<!-- <script src="https://cdn.form.io/uswds/uswds.min.js"></script> -->
+	<!-- <script src="https://cdn.form.io/formiojs/formio.full.js"></script> -->
+	<!-- <script src="https://cdn.form.io/js/formio.embed.js"></script> -->
 
-		<!-- Working Form.io CDN -->
-		<script src="https://unpkg.com/formiojs@4.21.6/dist/formio.full.min.js"></script>
-		<link href="https://cdn.jsdelivr.net/npm/formiojs@4.21.6/dist/formio.full.min.css" rel="stylesheet">
+	<link rel="icon" type="image/x-icon" href="favicon.ico">
 
-		<!-- Render the form -->
-		<script src="js/generateFormComponents.js"></script>
-		<script src="js/formDataToJson.js"></script>
-		<script src="js/autoGenerateFields.js"></script>
-		<script type="text/javascript">
-			createFormComponents()
-				.then((components) => {
-					Formio.createForm(document.getElementById("formio"), {
-						display: "form",
-						theme: "primary",
-						settings: {
-							pdf: {
-								id: "1ec0f8ee-6685-5d98-a847-26f67b67d6f0",
-								src: "https://files.form.io/pdf/5692b91fd1028f01000407e3/file/1ec0f8ee-6685-5d98-a847-26f67b67d6f0",
-							},
+	<!-- Uses bootstrap for now -->
+	<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+	<link rel="stylesheet" href="css/styles.css">
+
+	<!-- Working Form.io CDN -->
+	<script src="https://unpkg.com/formiojs@4.21.6/dist/formio.full.min.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/formiojs@4.21.6/dist/formio.full.min.css" rel="stylesheet">
+
+	<!-- Render the form -->
+	<script src="js/generateFormComponents.js"></script>
+	<script src="js/formDataToJson.js"></script>
+	<script src="js/autoGenerateFields.js"></script>
+	<script type="text/javascript">
+		createFormComponents()
+			.then((components) => {
+				Formio.createForm(document.getElementById("formio"), {
+					display: "form",
+					theme: "primary",
+					settings: {
+						pdf: {
+							id: "1ec0f8ee-6685-5d98-a847-26f67b67d6f0",
+							src: "https://files.form.io/pdf/5692b91fd1028f01000407e3/file/1ec0f8ee-6685-5d98-a847-26f67b67d6f0",
 						},
-						components: components,
-					}).then(function (form) {
-						window.formIOInstance = form;
-						form.on("submit", function (submission) {
-							console.log("form submission here:", submission);
-							createCodeJson(submission.data);
-						});
+					},
+					components: components,
+				}).then(function (form) {
+					window.formIOInstance = form;
+					form.on("submit", function (submission) {
+						console.log("form submission here:", submission);
+						createCodeJson(submission.data);
 					});
-				})
-				.catch((error) => {
-					console.error("Error creating components:", error);
 				});
-		</script>
-	</head>
-	<body>
-		<div id="form-header"></div>
+			})
+			.catch((error) => {
+				console.error("Error creating components:", error);
+			});
+	</script>
+</head>
 
-		<div id="notification" style="display: none;">
-			<p id="notification-message"></p>
+<body>
+	<div id="form-header"></div>
+
+	<div id="exemptions">
+		<p id="exemptions-header"></p>
+		<form id="exemptions-checklist">
+			<fieldset class="usa-fieldset">
+				<!-- <legend class="usa-legend">Answer the series of questions below to determine the maturity model tier of
+					your project:</legend> -->
+				<h5>Security & Privacy</h5>
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+					<label class="form-check-label" for="flexCheckDefault">
+						Is the source code classified or developed primarily for use in a national security system?
+					</label>
+				</div>
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+					<label class="form-check-label" for="flexCheckDefault">
+						Is the source code created by an agency or part of an agency that is an element of the
+						intelligence community, as defined in section 3(4) of the National Security Act of 1947.</label>
+				</div>
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+					<label class="form-check-label" for="flexCheckDefault">
+						Is the source code exempt under section 552(b) of title 5, USC (commonly known as the "Freedom
+						of Information Act").
+					</label>
+				</div>
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+					<label class="form-check-label" for="flexCheckDefault">
+						Does the source code create an identifiable risk to the privacy of an individual?</label>
+				</div>
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+					<label class="form-check-label" for="flexCheckDefault">
+						Is the source code exempted by the CIO?</label>
+				</div>
+				<h5>National Security and Intelligence</h5>
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+					<label class="form-check-label" for="flexCheckDefault">
+						Is the source code primarily for use in national security systems, as defined in Section 11103
+						of title 40, USC?
+					</label>
+				</div>
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+					<label class="form-check-label" for="flexCheckDefault">
+						Is the source code created by an agency or part of an agency that is an element of the
+						intelligence community, as defined in section 3(4) of the National Security Act of 1947?
+					</label>
+				</div>
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+					<label class="form-check-label" for="flexCheckDefault">
+						Is the source code exempt under section 552(b) of title 5, USC (commonly known as the
+						"Freedom of Information Act")?
+					</label>
+				</div>
+				<h5>Export and Regulatory Compliance</h5>
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+					<label class="form-check-label" for="flexCheckDefault">
+						Is the project prohibited under Export Administration Regulations?
+					</label>
+				</div>
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+					<label class="form-check-label" for="flexCheckDefault">
+						Is the project prohibited under International Traffic in Arms Regulations (ITAR)?
+					</label>
+				</div>
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+					<label class="form-check-label" for="flexCheckDefault">
+						Is the project prohibited under Regulations of the Transportation Security Administration
+						related to the protection of sensitive
+						information?
+					</label>
+				</div>
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+					<label class="form-check-label" for="flexCheckDefault">
+						Is the project prohibited under Federal laws and regulations governing the sharing of
+						classified
+						information?
+					</label>
+				</div>
+			</fieldset>
+			<button type="submit" class="usa-button">
+				Submit
+			</button>
+		</form>
+	</div>
+
+	<div id="notification" style="display: none;">
+		<p id="notification-message"></p>
+	</div>
+
+	<div id="auto-generation">
+		<p id="auto-generation-header"></p>
+		<form id="github-url-form">
+			<label for="repo-url">GitHub Repository URL</label><br>
+			<input type="text" id="repo-url" name="repo-url"><br>
+			<input type="submit" id="repo-url-button" value="Submit">
+		</form>
+	</div>
+
+	<div id="form-subheader">
+		<div class="step-header">
+			<div class="step-number">3</div>
+			<h3>Complete the entire form to generate the code.json file</h3>
 		</div>
-		
-		<div id="auto-generation">
-			<p id="auto-generation-header"></p>
-			<form id="github-url-form">
-				<label for="repo-url">GitHub Repository URL</label><br>
-				<input type="text" id="repo-url" name="repo-url"><br>
-				<input type="submit" id="repo-url-button" value="Submit">
-			</form>
-		</div>
+	</div>
+	<br>
 
-		<div id="formio"></div>
+	<div id="formio"></div>
 
-		<div id="output">
-			<label for="json-result">Your JSON Metadata </label>
-        	<textarea class="form-control" rows="10" id="json-result" readonly></textarea>
-			<button type="button" class="btn btn-outline" href="#" onclick="copyToClipboard(event)">Copy</button>
-			<button type="button" class="btn btn-outline" href="#" onclick="downloadFile(event)">Download</button>
-			<button type="button" class="btn btn-outline" href="#" onclick="createProjectPR(event)">Create Pull Request</button>
-			<button type="button" class="btn btn-outline" href="#" onclick="emailFile(event)">Email</button>
-		</div>
+	<div id="output">
+		<label for="json-result">Your JSON Metadata </label>
+		<textarea class="form-control" rows="10" id="json-result" readonly></textarea>
+		<button type="button" class="btn btn-outline" href="#" onclick="copyToClipboard(event)">Copy</button>
+		<button type="button" class="btn btn-outline" href="#" onclick="downloadFile(event)">Download</button>
+		<button type="button" class="btn btn-outline" href="#" onclick="createProjectPR(event)">Create Pull
+			Request</button>
+		<button type="button" class="btn btn-outline" href="#" onclick="emailFile(event)">Email</button>
+	</div>
 
-	</body>
+</body>
+
 </html>
