@@ -28,6 +28,7 @@
 	<!-- Render the form -->
 	<script src="js/generateFormComponents.js"></script>
 	<script src="js/formDataToJson.js"></script>
+	<script src="js/exemptionQuizHandler.js"></script>
 	<script src="js/autoGenerateFields.js"></script>
 	<script type="text/javascript">
 		createFormComponents()
@@ -61,80 +62,79 @@
 
 	<div id="exemptions">
 		<p id="exemptions-header"></p>
-		<form id="exemptions-checklist">
-			<fieldset class="usa-fieldset">
-				<div class="usa-checkbox">
-					<input class="usa-checkbox__input" id="check-national-security-systems" type="checkbox"
-						name="national-security-systems" value="exemptedByNationalSecurity">
-					<label class="usa-checkbox__label" for="check-national-security-systems">
-						Is the project primarily for use in national security systems, as defined in Section 11103 of
-						title 40, USC?</label>
-				</div>
-				<div class="usa-checkbox">
-					<input class="usa-checkbox__input" id="check-intelligence-community" type="checkbox"
-						name="intelligence-community" value="exemptedByIntelligence">
-					<label class="usa-checkbox__label" for="check-intelligence-community">Is the project created by an
-						agency or part of an agency that is an element of the intelligence community, as defined in
-						section 3(4) of the National Security Act of 1947?</label>
-				</div>
-				<div class="usa-checkbox">
-					<input class="usa-checkbox__input" id="check-freedom-information-act" type="checkbox"
-						name="freedom-information-act" value="exemptByFOIA">
-					<label class="usa-checkbox__label" for="check-freedom-information-act">Is the project exempt under
-						section 552(b) of title 5, USC (commonly known as the
-						"Freedom of Information Act")?</label>
-				</div>
-				<div class="usa-checkbox">
-					<input class="usa-checkbox__input" id="check-EAR" type="checkbox"
-						name="export-administration-regulations" value="exemptByEAR">
-					<label class="usa-checkbox__label" for="check-EAR">Is the project prohibited under Export
-						Administration Regulations?</label>
-				</div>
-				<div class="usa-checkbox">
-					<input class="usa-checkbox__input" id="check-ITAR" type="checkbox"
-						name="international-traffic-in-arms-regulations" value="exemptByITAR">
-					<label class="usa-checkbox__label" for="check-ITAR">Is the project prohibited under International
-						Traffic in Arms Regulations (ITAR)?</label>
-				</div>
-				<div class="usa-checkbox">
-					<input class="usa-checkbox__input" id="check-TSA" type="checkbox" name="regulations-of-tsa"
-						value="exemptedByTSA">
-					<label class="usa-checkbox__label" for="check-TSA">Is the project prohibited under Regulations of
-						the Transportation Security Administration related to the protection of sensitive information?
-					</label>
-				</div>
-				<div class="usa-checkbox">
-					<input class="usa-checkbox__input" id="check-classified-information" type="checkbox"
-						name="classified-information" value="exemptByClassifiedInformation">
-					<label class="usa-checkbox__label" for="check-classified-information">Is the project prohibited
-						under federal laws and regulations governing the sharing of
-						classified information? </label>
-				</div>
-				<div class="usa-checkbox">
-					<input class="usa-checkbox__input" id="check-privacy" type="checkbox"
-						name="export-administration-regulations" value="exemptByPrivacyRisk">
-					<label class="usa-checkbox__label" for="check-privacy">
-						Does the source code create an identifiable risk to the privacy of an individual?</label>
-				</div>
-				<div class="usa-checkbox">
-					<input class="usa-checkbox__input" id="check-none" type="checkbox" name="none" value="none">
-					<label class="usa-checkbox__label" for="check-none">None of the above </label>
-				</div>
-			</fieldset>
-			<br>
-			<button type="submit" class="usa-button">
-				Submit
-			</button>
-		</form>
-	</div>
-
-	<div class="results" style="display: none;">
-		<div class="results-container">
-			<img src="assets/images/tier0-tree.svg" class="tree-graphic" alt="Tree graphic">
-			<p class="tier-result">Your project is: </p>
-			<br>
+		<div class="exemptions-quiz-container">
+			<div id="exemptions-quiz">
+				<fieldset class="usa-fieldset">
+					<div class="usa-checkbox">
+						<input class="usa-checkbox__input" id="check-national-security-systems" type="checkbox"
+							name="exemption-condition" value="exemptedByNationalSecurity">
+						<label class="usa-checkbox__label" for="check-national-security-systems">
+							Is the project primarily for use in national security systems, as defined in Section 11103
+							of title 40, USC?</label>
+					</div>
+					<div class="usa-checkbox">
+						<input class="usa-checkbox__input" id="check-intelligence-community" type="checkbox"
+							name="exemption-condition" value="exemptedByIntelligence">
+						<label class="usa-checkbox__label" for="check-intelligence-community">Is the project created by
+							an agency or part of an agency that is an element of the intelligence community, as defined
+							in section 3(4) of the National Security Act of 1947?</label>
+					</div>
+					<div class="usa-checkbox">
+						<input class="usa-checkbox__input" id="check-freedom-information-act" type="checkbox"
+							name="exemption-condition" value="exemptByFOIA">
+						<label class="usa-checkbox__label" for="check-freedom-information-act">Is the project exempt
+							under section 552(b) of title 5, USC (commonly known as the "Freedom of Information
+							Act")?</label>
+					</div>
+					<div class="usa-checkbox">
+						<input class="usa-checkbox__input" id="check-EAR" type="checkbox" name="exemption-condition"
+							value="exemptByEAR">
+						<label class="usa-checkbox__label" for="check-EAR">Is the project prohibited under Export
+							Administration Regulations?</label>
+					</div>
+					<div class="usa-checkbox">
+						<input class="usa-checkbox__input" id="check-ITAR" type="checkbox" name="exemption-condition"
+							value="exemptByITAR">
+						<label class="usa-checkbox__label" for="check-ITAR">Is the project prohibited under
+							International Traffic in Arms Regulations (ITAR)?</label>
+					</div>
+					<div class="usa-checkbox">
+						<input class="usa-checkbox__input" id="check-TSA" type="checkbox" name="exemption-condition"
+							value="exemptedByTSA">
+						<label class="usa-checkbox__label" for="check-TSA">Is the project prohibited under Regulations
+							of the Transportation Security Administration related to the protection of sensitive
+							information?
+						</label>
+					</div>
+					<div class="usa-checkbox">
+						<input class="usa-checkbox__input" id="check-classified-information" type="checkbox"
+							name="exemption-condition" value="exemptByClassifiedInformation">
+						<label class="usa-checkbox__label" for="check-classified-information">Is the project prohibited
+							under federal laws and regulations governing the sharing of classified information? </label>
+					</div>
+					<div class="usa-checkbox">
+						<input class="usa-checkbox__input" id="check-privacy" type="checkbox" name="exemption-condition"
+							value="exemptByPrivacyRisk">
+						<label class="usa-checkbox__label" for="check-privacy">
+							Does the source code create an identifiable risk to the privacy of an individual?</label>
+					</div>
+					<div class="usa-checkbox">
+						<input class="usa-checkbox__input" id="check-none" type="checkbox" name="exemption-condition"
+							value="none">
+						<label class="usa-checkbox__label" for="check-none">None of the above </label>
+					</div>
+				</fieldset>
+				<button type="button" onclick="determineExemptions()">Submit</button>
+				<br>
+			</div>
 		</div>
-		<a href="#" class="doc-link" onclick="handleClick(event)">Try Again</a>
+		<div class="results" style="display: none;">
+			<div class="results-container">
+				<p class="exemption-result">Your project </p>
+				<br>
+			</div>
+			<a href="#" class="doc-link" onclick="handleClick(event)">Try Again</a>
+		</div>
 	</div>
 
 	<div id="notification" style="display: none;">
