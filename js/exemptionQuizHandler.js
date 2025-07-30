@@ -4,9 +4,7 @@ function determineExemptions() {
     const resultsContainer = document.querySelector(".results");
     const exemptionResult = document.querySelector(".exemption-result");
 
-    const checkedValues = Array.from(
-        document.querySelectorAll("input[name='exemption-condition']:checked")
-    ).map((input) => input.value);
+    const checkedValues = Array.from(document.querySelectorAll("input[name='exemption-condition']:checked")).map((input) => input.value);
 
     console.log("Selected answers:", checkedValues);
 
@@ -16,6 +14,7 @@ function determineExemptions() {
     quizContainer.style.display = "none";
     resultsContainer.style.display = "block";
     exemptionResult.innerHTML = results;
+
 }
 
 function determineResults(checkedValues) {
@@ -36,10 +35,18 @@ function determineResults(checkedValues) {
                 <p>Based on your selections, your project is exempted from the SHARE IT Act ❌</p>
                 <p>We've marked this in the form below for you as: <strong>${selections}</strong></p>
                 <p>Be sure to include a 1–2 sentence justification in the <code>exemptionText</code> field to support the exemption determination.</p>`;
+
+        // Applies value to usageType on form
+        try {
+            const form = window.formIOInstance
+            form.getComponent('usageType').setValue(checkedValues);
+        }
+        catch {
+            console.error("Form fill error:", error);
+        }
     }
 
     return text;
-
 }
 
 function uncheckAllCheckboxes() {
