@@ -61,8 +61,10 @@
 	<div id="form-header"></div>
 
 	<div id="exemptions">
-		<p id="exemptions-header"></p>
+		<div id="exemptions-header"></div>
 		<div class="exemptions-quiz-container">
+			<h4 id="quiz-subheading"> Answer the series of questions below to determine if your project falls under the
+				4 exemption categories according to the SHARE IT Act. </h4>
 			<div id="exemptions-quiz">
 				<fieldset class="usa-fieldset">
 					<div class="usa-checkbox">
@@ -125,15 +127,13 @@
 					</div>
 				</fieldset>
 				<button type="button" onclick="determineExemptions()">Submit</button>
-				<br>
 			</div>
 		</div>
 		<div class="results" style="display: none;">
 			<div class="results-container">
 				<p class="exemption-result">Your project </p>
-				<br>
 			</div>
-			<a href="#" class="doc-link" onclick="handleClick(event)">Try Again</a>
+			<button onclick="handleClick(event)">Try Again</button>
 		</div>
 	</div>
 

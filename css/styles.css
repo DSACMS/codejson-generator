@@ -76,6 +76,14 @@ textarea {
     font-size: 20px;
 }
 
+.exemptions-quiz-container #quiz-subheading {
+    margin: 10px 0px 20px 0px;
+}
+
+/* .results-container p {
+    margin: 20px 0px;
+} */
+
 @keyframes slideDown {
     from {
         opacity: 0;

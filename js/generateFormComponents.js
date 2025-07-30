@@ -256,7 +256,7 @@ function createFormHeading(title, description) {
 
 function createExemptionsBox() {
 	const container = document.getElementById("exemptions-header")
-	container.innerHTML = `<div class="step-header"><div class="step-number">1</div><h3>Is my project exempted from the SHARE IT Act?</h3></div> \n <h4> Answer the series of questions below to determine if your project falls under the 4 exemption categories according to the SHARE IT Act. </h4>`
+	container.innerHTML = `<div class="step-header"><div class="step-number">1</div><h3>Is my project exempted from the SHARE IT Act?</h3></div>`
 }
 
 function createAutoGenerationBox() {
