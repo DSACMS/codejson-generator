@@ -366,6 +366,10 @@
                     4
                 ],
                 "description": "Maturity model tier according to the CMS Open Source Repository Maturity Model Framework: https://github.com/DSACMS/repo-scaffolder/blob/main/maturity-model-tiers.md"
+            },
+            "AIUseCaseInventory": {
+                "type": "boolean",
+                "description": "Is the software included in the agency's AI use case inventory?"
             }
         }
     },
@@ -400,7 +404,8 @@
         "projects",
         "subsetInHealthcare",
         "userType",
-        "maturityModelTier"
+        "maturityModelTier",
+        "AIUseCaseInventory"
     ],
     "additionalProperties": false
 }
