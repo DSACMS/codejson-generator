@@ -24,15 +24,13 @@ function determineResults(checkedValues) {
     // Project qualifies for the SHARE IT Act
     if (checkedValues.includes("none")) {
         text = `<h4>Your project is: <strong>NOT EXEMPTED</strong></h4>
-                <p>Based on your selections, your project qualifies for the SHARE IT Act ✅</p>
                 <p>If your repository is public, mark <code>usageType</code> as <strong>openSource</strong>.</p>
-                <p>If your repository is private/internal, mark <code>usageType</code> as <strong>governmentWideReuse</strong>.</p>`;
+                <p>If your repository is private, mark <code>usageType</code> as <strong>governmentWideReuse</strong>.</p>`;
     }
     // Project is exempted
     else {
         const selections = checkedValues.join(", ");
         text = `<h4>Your project is: <strong>EXEMPTED</strong></h4>
-                <p>Based on your selections, your project is exempted from the SHARE IT Act ❌</p>
                 <p>We've marked this in the form below for you as: <strong>${selections}</strong></p>
                 <p>Be sure to include a 1–2 sentence justification in the <code>exemptionText</code> field to support the exemption determination.</p>`;
 
