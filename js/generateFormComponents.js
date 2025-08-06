@@ -257,11 +257,13 @@ function createFormHeading(title, description) {
 function createExemptionsBox() {
 	const container = document.getElementById("exemptions-header")
 	container.innerHTML = `<div class="step-header"><div class="step-number">1</div><h3>Is my project exempted from the SHARE IT Act?</h3></div>`
+	const secondContainer = document.getElementById("exemptions2-header")
+	secondContainer.innerHTML = `<div class="step-header"><div class="step-number">2</div><h3>Is my project exempted from M-16-21?</h3></div>`
 }
 
 function createAutoGenerationBox() {
 	const container = document.getElementById("auto-generation-header")
-	container.innerHTML = `<div class="step-header"><div class="step-number">2</div><h3>Auto Generate Fields</h3></div> \n <h4> Please enter your repositories GitHub URL in order to automatically pre-fill some of the fields in this form! </h4> \n <h6> <i>This currently only works on <b>public</b> repositories</i> </h6>`
+	container.innerHTML = `<div class="step-header"><div class="step-number">3</div><h3>Auto Generate Fields</h3></div> \n <h4> Please enter your repositories GitHub URL in order to automatically pre-fill some of the fields in this form! </h4> \n <h6> <i>This currently only works on <b>public</b> repositories</i> </h6>`
 }
 
 // Iterates through each json field and creates component array for Form.io

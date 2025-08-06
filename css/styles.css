@@ -7,7 +7,7 @@ textarea {
 }
 
 #auto-generation,
-#exemptions {
+.exemptions {
     border-radius: 15px;
     padding: 20px;
     padding-bottom: 25px;
@@ -19,7 +19,7 @@ textarea {
     box-sizing: border-box;
 }
 
-#exemptions {
+.exemptions {
     max-width: 1300px;
 }
 
@@ -78,6 +78,11 @@ textarea {
 
 .exemptions-quiz-container #quiz-subheading {
     margin: 10px 0px 20px 0px;
+}
+
+.not-exempt {
+    color: green;
+    display: inline-block;
 }
 
 /* .results-container p {

@@ -60,23 +60,25 @@
 <body>
 	<div id="form-header"></div>
 
-	<div id="exemptions">
+	<div class="exemptions" id="share-it-act">
 		<div id="exemptions-header"></div>
-		<div class="exemptions-quiz-container">
-			<h4 id="quiz-subheading"> Answer the series of questions below to determine if your project falls under the
-				4 exemption categories according to the SHARE IT Act. </h4>
+		<div id="exemptions-quiz-container" class="exemptions-quiz-container">
+			<h4 id="quiz-subheading">
+				Answer the series of questions below to determine if your project falls under the exemption categories
+				according to the SHARE IT Act.
+			</h4>
 			<div id="exemptions-quiz">
 				<fieldset class="usa-fieldset">
 					<div class="usa-checkbox">
-						<input class="usa-checkbox__input" id="check-national-security-systems" type="checkbox"
+						<input class="usa-checkbox__input" id="check-national-security" type="checkbox"
 							name="exemption-condition" value="exemptByNationalSecurity">
-						<label class="usa-checkbox__label" for="check-national-security-systems">
+						<label class="usa-checkbox__label" for="check-national-security">
 							Is the project primarily for use in national security systems, as defined in Section 11103
 							of title 40, USC?</label>
 					</div>
 					<div class="usa-checkbox">
 						<input class="usa-checkbox__input" id="check-intelligence-community" type="checkbox"
-							name="exemption-condition" value="exemptByIntelligence">
+							name="exemption-condition" value="exemptByNationalIntelligence">
 						<label class="usa-checkbox__label" for="check-intelligence-community">Is the project created by
 							an agency or part of an agency that is an element of the intelligence community, as defined
 							in section 3(4) of the National Security Act of 1947?</label>
@@ -121,19 +123,75 @@
 							Does the source code create an identifiable risk to the privacy of an individual?</label>
 					</div>
 					<div class="usa-checkbox">
-						<input class="usa-checkbox__input" id="check-none" type="checkbox" name="exemption-condition"
-							value="none">
-						<label class="usa-checkbox__label" for="check-none">None of the above </label>
+						<input class="usa-checkbox__input" id="share-it-act-check-none" type="checkbox"
+							name="exemption-condition" value="share-it-act-none">
+						<label class="usa-checkbox__label" for="share-it-act-check-none">None of the above </label>
 					</div>
 				</fieldset>
-				<button type="button" onclick="determineExemptions()">Submit</button>
+				<button type="button" id="share-it-act" onclick="determineExemptions(event)">Submit</button>
 			</div>
 		</div>
 		<div class="results" style="display: none;">
 			<div class="results-container">
 				<p class="exemption-result">Your project </p>
 			</div>
-			<button onclick="handleClick(event)">Try Again</button>
+			<button id="share-it-act" onclick="handleClick(event)">Try Again</button>
+		</div>
+	</div>
+
+	<div class="exemptions" id="m-16-21">
+		<div id="exemptions2-header"></div>
+		<div class="exemptions-quiz-container">
+			<h4 id="quiz-subheading">
+				Answer the series of questions below to determine if your project falls under the exemption categories
+				according to M-16-21 Act.
+			</h4>
+			<div id="exemptions-quiz">
+				<fieldset class="usa-fieldset">
+					<div class="usa-checkbox">
+						<input class="usa-checkbox__input" id="check-agency-systems" type="checkbox"
+							name="exemption-condition" value="exemptByAgencySystem">
+						<label class="usa-checkbox__label" for="check-agency-systems">
+							Does sharing of the source code create an identifiable risk to the stability, security, or
+							integrity of the agency’s systems or personnel?
+						</label>
+					</div>
+					<div class="usa-checkbox">
+						<input class="usa-checkbox__input" id="check-agency-mission" type="checkbox"
+							name="exemption-condition" value="exemptByAgencyMission">
+						<label class="usa-checkbox__label" for="check-agency-mission">
+							Does sharing of the source code create an identifiable risk to agency mission, programs, or
+							operations?
+						</label>
+					</div>
+					<div class="usa-checkbox">
+						<input class="usa-checkbox__input" id="check-CIO" type="checkbox" name="exemption-condition"
+							value="exemptByCIO">
+						<label class="usa-checkbox__label" for="check-CIO">
+							Does the CIO believes it is in the national interest to exempt sharing the source code?
+						</label>
+					</div>
+					<div class="usa-checkbox">
+						<input class="usa-checkbox__input" id="check-date" type="checkbox" name="exemption-condition"
+							value="exemptByPolicyDate">
+						<label class="usa-checkbox__label" for="check-date">
+							Was the release was created prior to the M-16-21 policy (August 8, 2016)
+						</label>
+					</div>
+					<div class="usa-checkbox">
+						<input class="usa-checkbox__input" id="m-16-21-check-none" type="checkbox"
+							name="exemption-condition" value="m-16-21-none">
+						<label class="usa-checkbox__label" for="m-16-21-check-none">None of the above </label>
+					</div>
+				</fieldset>
+				<button type="button" id="m-16-21" onclick="determineExemptions(event)">Submit</button>
+			</div>
+		</div>
+		<div class="results" style="display: none;">
+			<div class="results-container">
+				<p class="exemption-result">Your project </p>
+			</div>
+			<button id="m-16-21" onclick="handleClick(event)">Try Again</button>
 		</div>
 	</div>
 
@@ -152,7 +210,7 @@
 
 	<div id="form-subheader">
 		<div class="step-header">
-			<div class="step-number">3</div>
+			<div class="step-number">4</div>
 			<h3>Complete the entire form to generate the code.json file</h3>
 		</div>
 	</div>
