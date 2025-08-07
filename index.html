@@ -60,8 +60,60 @@
 <body>
 	<div id="form-header"></div>
 
-	<div class="exemptions" id="share-it-act">
-		<div id="exemptions-header"></div>
+	<div class="exemptions" id="start">
+		<div class="exemptions-header">
+			<div class="step-header">
+				<div class="step-number">1</div>
+				<h3>Identify your project's classification</h3>
+			</div>
+		</div>
+		<div id="exemptions-quiz-container" class="exemptions-quiz-container">
+			<h4 id="quiz-subheading">
+				My project is considered:
+			</h4>
+			<div id="exemptions-quiz">
+				<fieldset class="usa-fieldset">
+					<div class="usa-radio">
+						<input class="usa-radio__input usa-radio__input--tile" id="check-open-source" type="radio"
+							name="exemption-condition" value="openSource" />
+						<label class="usa-radio__label" for="check-open-source">Open Source</label>
+						<span class="usa-checkbox__label-description">This project is publicly available
+							and licensed under terms that allow others to use, modify, and distribute it (e.g.
+							github.com)</span></label>
+					</div>
+					<div class="usa-radio">
+						<input class="usa-radio__input usa-radio__input--tile" id="check-govt-reuse" type="radio"
+							name="exemption-condition" value="governmentWideReuse" />
+						<label class="usa-radio__label" for="check-govt-reuse">Government Wide Reuse</label>
+						<span class="usa-checkbox__label-description">The project is available internally for government
+							wide use (e.g. github.cms.gov)</span></label>
+					</div>
+					<div class="usa-radio">
+						<input class="usa-radio__input usa-radio__input--tile" id="check-exempt" type="radio"
+							name="exemption-condition" value="exempt" />
+						<label class="usa-radio__label" for="check-exempt">None of the above</label>
+						<span class="usa-checkbox__label-description">The project may be considered exempted from
+							sharing and reuse as per the SHARE IT Act and M-16-21. </span></label>
+					</div>
+				</fieldset>
+				<button type="button" id="start" onclick="determineExemptions(event)">Submit</button>
+			</div>
+		</div>
+		<div class="results" style="display: none;">
+			<div class="results-container">
+				<p class="exemption-result">Your project </p>
+			</div>
+			<button id="start" onclick="handleClick(event)">Try Again</button>
+		</div>
+	</div>
+
+	<div class="exemptions" id="share-it-act" style="display: none;">
+		<div class="exemptions-header">
+			<div class="step-header">
+				<div class="step-number">1b</div>
+				<h3>Is my project exempted from the SHARE IT Act?</h3>
+			</div>
+		</div>
 		<div id="exemptions-quiz-container" class="exemptions-quiz-container">
 			<h4 id="quiz-subheading">
 				Answer the series of questions below to determine if your project falls under the exemption categories
@@ -135,12 +187,17 @@
 			<div class="results-container">
 				<p class="exemption-result">Your project </p>
 			</div>
-			<button id="share-it-act" onclick="handleClick(event)">Try Again</button>
+			<button id="share-it-act" onclick="handleClick(event)">Next</button>
 		</div>
 	</div>
 
-	<div class="exemptions" id="m-16-21">
-		<div id="exemptions2-header"></div>
+	<div class="exemptions" id="m-16-21" style="display: none;">
+		<div class="exemptions-header">
+			<div class="step-header">
+				<div class="step-number">1c</div>
+				<h3>Is my project exempted from M-16-21?</h3>
+			</div>
+		</div>
 		<div class="exemptions-quiz-container">
 			<h4 id="quiz-subheading">
 				Answer the series of questions below to determine if your project falls under the exemption categories
@@ -148,6 +205,13 @@
 			</h4>
 			<div id="exemptions-quiz">
 				<fieldset class="usa-fieldset">
+					<div class="usa-checkbox">
+						<input class="usa-checkbox__input" id="check-patent-and-ip" type="checkbox"
+							name="exemption-condition" value="exemptByIPRestriction">
+						<label class="usa-checkbox__label" for="check-patnet-and-ip">
+							Is sharing of the source code limited by patent or intellectual property restrictions?
+						</label>
+					</div>
 					<div class="usa-checkbox">
 						<input class="usa-checkbox__input" id="check-agency-systems" type="checkbox"
 							name="exemption-condition" value="exemptByAgencySystem">
@@ -210,7 +274,7 @@
 
 	<div id="form-subheader">
 		<div class="step-header">
-			<div class="step-number">4</div>
+			<div class="step-number">3</div>
 			<h3>Complete the entire form to generate the code.json file</h3>
 		</div>
 	</div>
