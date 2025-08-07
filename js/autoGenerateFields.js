@@ -163,7 +163,7 @@ async function getLicenseURL(repoURL) {
 
         const licenseFile = files.find(file => {
             const fileName = file.name.toLowerCase()
-            return fileName.startsWith('license') 
+            return fileName.startsWith('license')
         })
 
         if (licenseFile) {
@@ -244,7 +244,7 @@ async function preFillFields(repoData, languages) {
         }
 
         // Update languages list by combining any the user has entered
-        if (languages) {
+        if (form.getComponent('languages') && languages) {
             const languagesComp = form.getComponent('languages')
             const newLanguages = Object.keys(languages) || []
 
@@ -274,18 +274,16 @@ async function preFillFields(repoData, languages) {
         // Update feedback mechanisms
         if (repoData.html_url) {
             const feedbackComp = form.getComponent('feedbackMechanisms')
-            let currentFeedback = form.getComponent('feedbackMechanisms').getValue
-            currentFeedback = []
 
             const issuesUrl = repoData.html_url + "/issues"
 
-            currentFeedback.push(issuesUrl)
-            feedbackComp.setValue(currentFeedback)
+            feedbackComp.setValue(issuesUrl)
         }
 
         // Update upstream 
-        if (repoData.html_url) {
-            const upstreamComp = form.getComponent('upstream')
+
+        if (form.getComponent('upstream') && repoData.html_url) {
+            const upstreamComp = form.getComponent('upstream');
             const urlParts = repoData.html_url.split('/')
 
             if (urlParts.length >= 2) {
@@ -299,7 +297,7 @@ async function preFillFields(repoData, languages) {
         }
 
         // Update repositoryHost
-        if (repoData.html_url) {
+        if (form.getComponent('repositoryHost') && repoData.html_url) {
             if (repoData.html_url.includes('github.cms.gov')) {
                 form.getComponent('repositoryHost').setValue('github.cms.gov')
             } else if (repoData.html_url.includes('github.com/CMSgov')) {
