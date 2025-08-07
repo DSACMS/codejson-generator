@@ -247,12 +247,16 @@ function createComponent(fieldName, fieldObject, requiredArray) {
 // Adds heading containing schema information
 function createFormHeading(title, description) {
 	const container = document.getElementById('form-header');
-	container.innerHTML = `<h1>${title}</h1>\n<h2>${description}</h2>`;
+	container.innerHTML = `
+	<h1>${title}</h1>\n
+	<h2>${description}</h2>\n
+	<h3>Complete the form below to create a code.json file for your project:</h3>\n
+	`;
 }
 
 function createAutoGenerationBox() {
 	const container = document.getElementById("auto-generation-header")
-	container.innerHTML = `<h3>Auto Generate Fields</h3> \n <h4> Please enter your repositories GitHub URL in order to automatically pre-fill some of the fields in this form! </h4> \n <h6> <i>This currently only works on <b>public</b> repositories</i> </h6>`
+	container.innerHTML = `<div class="step-header"><div class="step-number">2</div><h3>Auto Generate Fields</h3></div> \n <h4> Please enter your repositories GitHub URL in order to automatically pre-fill some of the fields in this form! </h4> \n <h6> <i>This currently only works on <b>public</b> repositories</i> </h6>`
 }
 
 // Iterates through each json field and creates component array for Form.io

@@ -163,7 +163,7 @@ async function getLicenseURL(repoURL) {
 
         const licenseFile = files.find(file => {
             const fileName = file.name.toLowerCase()
-            return fileName.startsWith('license') 
+            return fileName.startsWith('license')
         })
 
         if (licenseFile) {
@@ -208,7 +208,13 @@ async function preFillFields(repoData, languages) {
 
         // Updating URL
         if (repoData.html_url) {
-            form.getComponent('repositoryURL').setValue(repoData.html_url)
+            if (repoData.private) {
+                // Private repositories must have "private" as their repositoryURL value
+                form.getComponent('repositoryURL').setValue("private")
+            }
+            else {
+                form.getComponent('repositoryURL').setValue(repoData.html_url)
+            }
         }
 
         // Updating forks
@@ -238,7 +244,7 @@ async function preFillFields(repoData, languages) {
         }
 
         // Update languages list by combining any the user has entered
-        if (languages) {
+        if (form.getComponent('languages') && languages) {
             const languagesComp = form.getComponent('languages')
             const newLanguages = Object.keys(languages) || []
 
@@ -268,18 +274,16 @@ async function preFillFields(repoData, languages) {
         // Update feedback mechanisms
         if (repoData.html_url) {
             const feedbackComp = form.getComponent('feedbackMechanisms')
-            let currentFeedback = form.getComponent('feedbackMechanisms').getValue
-            currentFeedback = []
 
             const issuesUrl = repoData.html_url + "/issues"
 
-            currentFeedback.push(issuesUrl)
-            feedbackComp.setValue(currentFeedback)
+            feedbackComp.setValue(issuesUrl)
         }
 
         // Update upstream 
-        if (repoData.html_url) {
-            const upstreamComp = form.getComponent('upstream')
+
+        if (form.getComponent('upstream') && repoData.html_url) {
+            const upstreamComp = form.getComponent('upstream');
             const urlParts = repoData.html_url.split('/')
 
             if (urlParts.length >= 2) {
@@ -293,7 +297,7 @@ async function preFillFields(repoData, languages) {
         }
 
         // Update repositoryHost
-        if (repoData.html_url) {
+        if (form.getComponent('repositoryHost') && repoData.html_url) {
             if (repoData.html_url.includes('github.cms.gov')) {
                 form.getComponent('repositoryHost').setValue('github.cms.gov')
             } else if (repoData.html_url.includes('github.com/CMSgov')) {
@@ -306,11 +310,11 @@ async function preFillFields(repoData, languages) {
         }
 
         // fields to potentially automate
-            // clones, but this is only tracked for every 14 days 
-            // status, by checking if its public, we can assume its production and check if its archival 
-            // laborHours, by running a script? this might be harder since we need SCC
-            // maturityModel, we could check to see if certain files / sections live within a repo and make a guess like that
-            // usageType, by assuming that if its public = openSource and if private = governmnetWideReuse
+        // clones, but this is only tracked for every 14 days 
+        // status, by checking if its public, we can assume its production and check if its archival 
+        // laborHours, by running a script? this might be harder since we need SCC
+        // maturityModel, we could check to see if certain files / sections live within a repo and make a guess like that
+        // usageType, by assuming that if its public = openSource and if private = governmnetWideReuse
 
         notificationSystem.success("Repository data loaded successfully!")
 
