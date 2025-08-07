@@ -15,6 +15,8 @@ async function retrieveFile(filePath) {
 }
 
 function isMultiSelect(obj) {
+	if (typeof obj !== 'object' || obj === null || Array.isArray(obj)) return false;
+
 	for (const key in obj) {
 		if (typeof obj[key] !== 'boolean') {
 			return false;
@@ -32,25 +34,27 @@ function getSelectedOptions(options) {
 			selectedOptions.push(key);
 		}
 	}
+
 	return selectedOptions;
 }
 
 // Populates fields with form data
-function populateObject(data, schema) {
+function populateObject(data, fields) {
 	let reorderedObject = {}
 
-	// Array of fields following proper order of fields in schema
-	const fields = Object.keys(schema.properties.items);
-
-	for (const key of fields) {
-		let value = data[key];
+	for (const field of fields) {
+		let value = data[field];
 
 		// Adjusts value accordingly if multi-select field
 		if ((typeof value === "object" && isMultiSelect(value))) {
 			value = getSelectedOptions(value);
 		}
+		// Recurses if multi-field object
+		else if (typeof value === 'object' && value !== null && Object.keys(value).length > 1) {
+			value = populateObject(value, Object.keys(value));
+		}
 
-		reorderedObject[key] = value;
+		reorderedObject[field] = value;
 	}
 
 	return reorderedObject;
@@ -68,7 +72,7 @@ async function populateCodeJson(data) {
 
 	// Populates fields with form data
 	if (schema) {
-		codeJson = populateObject(data, schema);
+		codeJson = populateObject(data, Object.keys(schema.properties));
 	} else {
 		console.error("Failed to retrieve JSON data.");
 	}
