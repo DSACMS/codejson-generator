@@ -295,7 +295,7 @@ async function downloadFile(event) {
 
 	const codeJson = document.getElementById("json-result").value
 	const jsonObject = JSON.parse(codeJson);
-	const jsonString = JSON.stringify(jsonObject, null, 2);
+	const jsonString = JSON.stringify(jsonObject, null, 2) + "\n";
 	const blob = new Blob([jsonString], { type: "application/json" });
 
 	// Create anchor element and create download link
