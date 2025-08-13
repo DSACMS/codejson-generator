@@ -1,8 +1,9 @@
 # codejson-generator
 
-Form to generate a CMS code.json
-
+Form to generate a code.json file
 https://dsacms.github.io/codejson-generator/
+
+> *For CMS code.json files*: https://dsacms.github.io/codejson-generator/cms
 
 ## About the Project
 
