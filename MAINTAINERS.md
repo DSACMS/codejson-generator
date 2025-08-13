@@ -85,6 +85,15 @@ Total number of contributors: <!--CONTRIBUTOR COUNT START--> <!--CONTRIBUTOR COU
                 </a>
             </td>
 		</tr>
+		<tr>
+            <td align="center">
+                <a href="https://github.com/gsf">
+                    <img src="https://avatars.githubusercontent.com/u/151913?v=4" width="100;" alt="gsf"/>
+                    <br />
+                    <sub><b>Sean Fern</b></sub>
+                </a>
+            </td>
+		</tr>
 	<tbody>
 </table>
 <!-- readme: contributors -end -->
