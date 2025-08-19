@@ -10,8 +10,7 @@
         },
         "description": {
             "type": "string",
-            "description": "A short description of the project. It should be a single line containing a single sentence. Maximum 150 characters are allowed.",
-            "maxLength": 150
+            "description": "A one or two sentence description of the software."
         },
         "longDescription": {
             "type": "string",
@@ -82,7 +81,7 @@
                             "openSource",
                             "governmentWideReuse",
                             "exemptByNationalSecurity",
-                            "exemptByIntelligence",
+                            "exemptByNationalIntelligence",
                             "exemptByFOIA",
                             "exemptByEAR",
                             "exemptByITAR",
@@ -115,7 +114,10 @@
         },
         "organization": {
             "type": "string",
-            "description": "The organization or component within the agency to which the releases listed belong. For example, '18F' or 'Navy'."
+            "description": "The organization or component within the agency to which the releases listed belong.",
+            "enum": [
+                "Centers for Medicare & Medicaid Services"
+            ]
         },
         "repositoryURL": {
             "type": "string",
@@ -231,8 +233,11 @@
             ]
         },
         "contractNumber": {
-            "type": "string",
-            "description": "Contract number"
+            "type": "array",
+            "description": "Contract number(s) under which the project was developed",
+            "items": {
+                "type": "string"
+            }
         },
         "date": {
             "type": "object",
@@ -277,12 +282,14 @@
                 }
             }
         },
-        "feedbackMechanisms": {
-            "type": "array",
-            "description": "Methods a repository receives feedback from the community. Default value is the URL to GitHub repository issues page.",
-            "items": {
-                "type": "string"
-            }
+        "feedbackMechanism": {
+            "type": "string",
+            "format": "uri",
+            "description": "Method a repository receives feedback from the community (i.e. URL to GitHub repository issues page)"
+        },
+        "AIUseCaseID": {
+            "type": "string",
+            "description": "The software's ID in the AI Use Case Inventory. If the software is not currently listed in the inventory, enter '0'."
         },
         "localisation": {
             "type": "boolean",
@@ -372,10 +379,6 @@
                 4
             ],
             "description": "Maturity model tier according to the CMS Open Source Repository Maturity Model Framework: https://github.com/DSACMS/repo-scaffolder/blob/main/maturity-model-tiers.md"
-        },
-        "AIUseCaseInventory": {
-            "type": "boolean",
-             "description": "Is the software included in the agency's AI use case inventory?"
         }
     },
     "required": [
@@ -400,7 +403,8 @@
         "date",
         "tags",
         "contact",
-        "feedbackMechanisms",
+        "feedbackMechanism",
+        "AIUseCaseID",
         "localisation",
         "repositoryType",
         "userInput",
@@ -409,8 +413,7 @@
         "projects",
         "subsetInHealthcare",
         "userType",
-        "maturityModelTier",
-        "AIUseCaseInventory"
+        "maturityModelTier"
     ],
     "additionalProperties": false
 }
