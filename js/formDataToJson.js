@@ -45,6 +45,11 @@ function populateObject(data, fields) {
 	for (const field of fields) {
 		let value = data[field];
 
+		// Does not assign optional properties with blank values
+		if (value == null || value === "") {
+			continue;
+		}
+
 		// Adjusts value accordingly if multi-select field
 		if ((typeof value === "object" && isMultiSelect(value))) {
 			value = getSelectedOptions(value);
