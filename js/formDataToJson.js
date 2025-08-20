@@ -16,7 +16,6 @@ async function retrieveFile(filePath) {
 
 function isMultiSelect(obj) {
 	if (typeof obj !== 'object' || obj === null || Array.isArray(obj)) return false;
-
 	for (const key in obj) {
 		if (typeof obj[key] !== 'boolean') {
 			return false;
@@ -45,12 +44,17 @@ function populateObject(data, fields) {
 	for (const field of fields) {
 		let value = data[field];
 
+		// Does not assign optional properties with blank values
+		if (value == null || value === "") {
+			continue;
+		}
+
 		// Adjusts value accordingly if multi-select field
 		if ((typeof value === "object" && isMultiSelect(value))) {
 			value = getSelectedOptions(value);
 		}
 		// Recurses if multi-field object
-		else if (typeof value === 'object' && value !== null && Object.keys(value).length > 1) {
+		else if (typeof value === 'object' && !Array.isArray(value) && value !== null && Object.keys(value).length > 1) {
 			value = populateObject(value, Object.keys(value));
 		}
 

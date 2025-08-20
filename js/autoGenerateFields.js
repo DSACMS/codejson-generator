@@ -273,7 +273,7 @@ async function preFillFields(repoData, languages) {
 
         // Update feedback mechanisms
         if (repoData.html_url) {
-            const feedbackComp = form.getComponent('feedbackMechanisms')
+            const feedbackComp = form.getComponent('feedbackMechanism')
 
             const issuesUrl = repoData.html_url + "/issues"
 

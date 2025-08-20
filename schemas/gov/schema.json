@@ -75,7 +75,7 @@
                             "openSource",
                             "governmentWideReuse",
                             "exemptByNationalSecurity",
-                            "exemptByIntelligence",
+                            "exemptByNationalIntelligence",
                             "exemptByFOIA",
                             "exemptByEAR",
                             "exemptByITAR",
@@ -151,6 +151,13 @@
             },
             "additionalProperties": true
         },
+        "languages": {
+            "type": "array",
+            "description": "Programming languages that make up the codebase",
+            "items": {
+                "type": "string"
+            }
+        },
         "maintenance": {
             "type": "string",
             "description": "The dedicated staff that keeps the software up-to-date, if any",
@@ -211,14 +218,14 @@
                 }
             }
         },
-        "feedbackMechanisms": {
+        "feedbackMechanism": {
             "type": "string",
             "format": "uri",
             "description": "Method a repository receives feedback from the community (i.e. URL to GitHub repository issues page)"
         },
-        "AIUseCaseInventory": {
-            "type": "boolean",
-            "description": "Is the software included in the agency's AI use case inventory?"
+        "AIUseCaseID": {
+            "type": "string",
+            "description": "The software's ID in the AI Use Case Inventory. If the software is not currently listed in the inventory, enter '0'."
         }
     },
     "required": [
@@ -238,8 +245,8 @@
         "date",
         "tags",
         "contact",
-        "feedbackMechanisms",
-        "AIUseCaseInventory"
+        "feedbackMechanism",
+        "AIUseCaseID"
     ],
-    "additionalProperties": false
+    "additionalProperties": true
 }
