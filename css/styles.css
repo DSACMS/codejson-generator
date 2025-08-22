@@ -1,59 +1,31 @@
 body {
-    margin: 20px;
+    padding: 20px 40px;
 }
 
 textarea {
     margin-bottom: 10px;
 }
 
-#auto-generation,
+.auto-generation,
 .exemptions {
     border-radius: 15px;
-    padding: 20px;
+    padding: 10px 20px;
     padding-bottom: 25px;
-    margin-top: 20px;
     margin-bottom: 20px;
     background: #e6e6e6;
     width: 100%;
-    max-width: 800px;
-    box-sizing: border-box;
-}
-
-.exemptions {
     max-width: 1300px;
-}
-
-#github-url-form,
-#exemptions-checklist {
-    margin-top: 25px;
-    width: 100%;
-}
-
-#repo-url {
-    width: 100%;
-    max-width: 750px;
     box-sizing: border-box;
 }
 
-#repo-url-button {
-    margin-top: 10px;
-    border-radius: 5px;
+#github-url-form {
+    margin-bottom: 0px;
 }
 
-#notification {
-    padding: 10px;
+.usa-alert {
     margin-bottom: 15px;
-    border-radius: 5px;
-    position: relative;
-    width: 100%;
-    max-width: 800px;
-    box-sizing: border-box;
+    max-width: 1300px;
     animation: slideDown 0.3s ease;
-}
-
-#notification-message {
-    margin: 0;
-    padding-right: 20px;
 }
 
 .step-header {
@@ -63,7 +35,6 @@ textarea {
 }
 
 .step-number {
-    margin-top: 10px;
     background-color: #337AB7;
     color: white;
     font-weight: bold;
@@ -76,18 +47,14 @@ textarea {
     font-size: 20px;
 }
 
-.exemptions-quiz-container #quiz-subheading {
-    margin: 10px 0px 20px 0px;
-}
-
 .not-exempt {
     color: green;
     display: inline-block;
 }
 
-/* .results-container p {
-    margin: 20px 0px;
-} */
+.button-actions {
+    margin-top: 20px;
+}
 
 @keyframes slideDown {
     from {
