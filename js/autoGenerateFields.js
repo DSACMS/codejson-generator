@@ -10,18 +10,17 @@ document.addEventListener("DOMContentLoaded", function () {
 const notificationSystem = {
     show: function (message, type = 'error') {
         const notification = document.getElementById('notification');
-        const messageElement = document.getElementById('notification-message');
+        const notificationHeading = document.querySelector('.usa-alert__heading')
+        const messageElement = document.querySelector('.usa-alert__text');
 
         messageElement.textContent = message;
 
         if (type === 'error') {
-            notification.style.backgroundColor = '#f8d7da';
-            notification.style.color = '#721c24';
-            notification.style.border = '1px solid #f5c6cb';
+            notification.classList.add("usa-alert--error");
+            notificationHeading.textContent = "Error";
         } else {
-            notification.style.backgroundColor = '#d4edda';
-            notification.style.color = '#155724';
-            notification.style.border = '1px solid #c3e6cb';
+            notification.classList.add("usa-alert--success");
+            notificationHeading.textContent = "Success";
         }
 
         notification.style.display = 'block';
