@@ -284,7 +284,6 @@
 			<h2>Complete the entire form to generate the code.json file</h2>
 		</div>
 	</div>
-	<br>
 
 	<div id="formio"></div>
 
@@ -292,14 +291,18 @@
 	<div id="output">
 		<label class="usa-label" for="json-result">Your code.json metadata</label>
 		<textarea class="usa-textarea" rows="30" id="json-result" name="json-result" readonly></textarea>
-		<button class="usa-button usa-button--outline" type="button" href="#"
-			onclick="copyToClipboard(event)">Copy</button>
-		<button class="usa-button usa-button--outline" type="button" href="#"
-			onclick="downloadFile(event)">Download</button>
-		<button class="usa-button usa-button--outline" type="button" href="#" onclick="createProjectPR(event)">Create
-			Pull
-			Request</button>
-		<button class="usa-button usa-button--outline" type="button" href="#" onclick="emailFile(event)">Email</button>
+		<div class="button-actions">
+			<button class="usa-button usa-button--outline" type="button" href="#"
+				onclick="copyToClipboard(event)">Copy</button>
+			<button class="usa-button usa-button--outline" type="button" href="#"
+				onclick="downloadFile(event)">Download</button>
+			<button class="usa-button usa-button--outline" type="button" href="#"
+				onclick="createProjectPR(event)">Create
+				Pull
+				Request</button>
+			<button class="usa-button usa-button--outline" type="button" href="#"
+				onclick="emailFile(event)">Email</button>
+		</div>
 	</div>
 
 </body>

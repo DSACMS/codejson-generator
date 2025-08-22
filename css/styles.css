@@ -18,6 +18,10 @@ textarea {
     box-sizing: border-box;
 }
 
+#github-url-form {
+    margin-bottom: 0px;
+}
+
 .usa-alert {
     margin-bottom: 15px;
     max-width: 1300px;
@@ -46,6 +50,10 @@ textarea {
 .not-exempt {
     color: green;
     display: inline-block;
+}
+
+.button-actions {
+    margin-top: 20px;
 }
 
 @keyframes slideDown {
