@@ -40,8 +40,10 @@
 </head>
 
 <body>
+
 	<div id="form-header"></div>
 
+	<!-- Exemptions Quiz: Simple Classification -->
 	<div class="exemptions" id="start">
 		<div class="exemptions-header">
 			<div class="step-header">
@@ -50,7 +52,7 @@
 			</div>
 		</div>
 		<div id="exemptions-quiz-container" class="exemptions-quiz-container">
-			<h4 id="quiz-subheading">
+			<h4 class="usa-heading margin-top-neg-05 margin-bottom-1" id="quiz-subheading">
 				My project is considered:
 			</h4>
 			<div id="exemptions-quiz">
@@ -91,6 +93,7 @@
 		</div>
 	</div>
 
+	<!-- Exemptions Quiz: SHARE IT Act -->
 	<div class="exemptions" id="share-it-act" style="display: none;">
 		<div class="exemptions-header">
 			<div class="step-header">
@@ -99,7 +102,7 @@
 			</div>
 		</div>
 		<div id="exemptions-quiz-container" class="exemptions-quiz-container">
-			<h4 id="quiz-subheading">
+			<h4 class="usa-heading margin-top-neg-05 margin-bottom-1" id="quiz-subheading">
 				Answer the series of questions below to determine if your project falls under the exemption categories
 				according to the SHARE IT Act.
 			</h4>
@@ -176,6 +179,7 @@
 		</div>
 	</div>
 
+	<!-- Exemptions Quiz: M-16-21 -->
 	<div class="exemptions" id="m-16-21" style="display: none;">
 		<div class="exemptions-header">
 			<div class="step-header">
@@ -184,7 +188,7 @@
 			</div>
 		</div>
 		<div class="exemptions-quiz-container">
-			<h4 id="quiz-subheading">
+			<h4 class="usa-heading margin-top-neg-05 margin-bottom-1" id="quiz-subheading">
 				Answer the series of questions below to determine if your project falls under the exemption categories
 				according to M-16-21 Act.
 			</h4>
@@ -246,6 +250,7 @@
 		</div>
 	</div>
 
+	<!-- Field Auto-Generation Notification -->
 	<div class="usa-alert" id="notification" style="display:none;">
 		<div class="usa-alert__body">
 			<h4 class="usa-alert__heading"></h4>
@@ -253,23 +258,26 @@
 		</div>
 	</div>
 
+	<!-- Field Auto-Generation -->
 	<div class="auto-generation">
 		<div class="auto-generation-header">
 			<div class="step-header">
 				<div class="step-number">2</div>
 				<h2>Auto Generate Fields</h2>
 			</div>
-			<h4 id="quiz-subheading"> Enter your repository's GitHub URL in order to automatically pre-fill some of the
+			<h4 class="usa-heading margin-top-neg-05 margin-bottom-1" id="quiz-subheading"> Enter your repository's
+				GitHub URL in order to automatically pre-fill some of the
 				fields in this form </h4>
 			<p><i>This currently only works on <b>public</b> repositories</i></p>
 		</div>
 		<form id="github-url-form">
 			<label class="usa-label" for="repo-url">GitHub Repository URL</label>
 			<input class="usa-input" id="repo-url" name="repo-url" />
-			<button class="usa-button" type="submit" id="repo-url-button">Submit</button>
+			<button class="usa-button margin-top-2" id="repo-url-button">Submit</button>
 		</form>
 	</div>
 
+	<!-- Form header -->
 	<div id="form-subheader">
 		<div class="step-header">
 			<div class="step-number">3</div>
@@ -280,14 +288,18 @@
 
 	<div id="formio"></div>
 
+	<!-- code.json Generated Output -->
 	<div id="output">
-		<label for="json-result">Your JSON Metadata </label>
-		<textarea class="form-control" rows="10" id="json-result" readonly></textarea>
-		<button type="button" class="btn btn-outline" href="#" onclick="copyToClipboard(event)">Copy</button>
-		<button type="button" class="btn btn-outline" href="#" onclick="downloadFile(event)">Download</button>
-		<button type="button" class="btn btn-outline" href="#" onclick="createProjectPR(event)">Create Pull
+		<label class="usa-label" for="json-result">Your code.json metadata</label>
+		<textarea class="usa-textarea" rows="30" id="json-result" name="json-result" readonly></textarea>
+		<button class="usa-button usa-button--outline" type="button" href="#"
+			onclick="copyToClipboard(event)">Copy</button>
+		<button class="usa-button usa-button--outline" type="button" href="#"
+			onclick="downloadFile(event)">Download</button>
+		<button class="usa-button usa-button--outline" type="button" href="#" onclick="createProjectPR(event)">Create
+			Pull
 			Request</button>
-		<button type="button" class="btn btn-outline" href="#" onclick="emailFile(event)">Email</button>
+		<button class="usa-button usa-button--outline" type="button" href="#" onclick="emailFile(event)">Email</button>
 	</div>
 
 </body>
