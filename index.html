@@ -1,29 +1,17 @@
 <html>
+<meta charset="UTF-8">
 
 <head>
-	<meta charset="utf-8">
-	<!-- USWDS not working -->
-	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-	<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uswds/2.11.2/css/uswds.min.css"> -->
-	<!-- <link rel="stylesheet" href="https://cdn.form.io/formiojs/formio.form.min.css"> -->
-	<!-- <link rel="stylesheet" href="https://cdn.form.io/uswds/uswds.min.css"> -->
-	<!-- <link rel="stylesheet" href="https://unpkg.com/formiojs@3.0.0-alpha.13/dist/formio.full.min.css"> -->
-	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/uswds/2.11.2/js/uswds.min.js"></script> -->
-	<!-- <script src="https://cdn.form.io/formiojs/formio.form.min.js"></script> -->
-	<!-- <script src="https://cdn.form.io/uswds/uswds.min.js"></script> -->
-	<!-- <script src="https://cdn.form.io/formiojs/formio.full.js"></script> -->
-	<!-- <script src="https://cdn.form.io/js/formio.embed.js"></script> -->
-
 	<link rel="icon" type="image/x-icon" href="favicon.ico">
-
-	<!-- Uses bootstrap for now -->
-	<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
 	<link rel="stylesheet" href="css/styles.css">
 
-	<!-- Working Form.io CDN -->
-	<script src="https://unpkg.com/formiojs@4.21.6/dist/formio.full.min.js"></script>
-	<link href="https://cdn.jsdelivr.net/npm/formiojs@4.21.6/dist/formio.full.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uswds/3.1.0/css/uswds.min.css">
+	<link rel="stylesheet" href="https://cdn.form.io/js/formio.form.min.css">
+	<link rel="stylesheet" href="https://cdn.form.io/uswds/uswds.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/uswds/3.1.0/js/uswds.min.js"></script>
+	<script src="https://cdn.form.io/js/formio.form.min.js"></script>
+	<script src="https://cdn.form.io/uswds/uswds.min.js"></script>
 
 	<!-- Render the form -->
 	<script src="js/generateFormComponents.js"></script>
@@ -33,20 +21,14 @@
 	<script type="text/javascript">
 		createFormComponents()
 			.then((components) => {
+				Formio.use(uswds);
 				Formio.createForm(document.getElementById("formio"), {
 					display: "form",
-					theme: "primary",
-					settings: {
-						pdf: {
-							id: "1ec0f8ee-6685-5d98-a847-26f67b67d6f0",
-							src: "https://files.form.io/pdf/5692b91fd1028f01000407e3/file/1ec0f8ee-6685-5d98-a847-26f67b67d6f0",
-						},
-					},
 					components: components,
 				}).then(function (form) {
 					window.formIOInstance = form;
 					form.on("submit", function (submission) {
-						console.log("form submission here:", submission);
+						console.log("Form Submission here:", submission);
 						createCodeJson(submission.data);
 					});
 				});
@@ -64,7 +46,7 @@
 		<div class="exemptions-header">
 			<div class="step-header">
 				<div class="step-number">1</div>
-				<h3>Identify your project's classification</h3>
+				<h2>Identify your project's classification</h2>
 			</div>
 		</div>
 		<div id="exemptions-quiz-container" class="exemptions-quiz-container">
@@ -76,34 +58,35 @@
 					<div class="usa-radio">
 						<input class="usa-radio__input usa-radio__input--tile" id="check-open-source" type="radio"
 							name="exemption-condition" value="openSource" />
-						<label class="usa-radio__label" for="check-open-source">Open Source</label>
-						<span class="usa-checkbox__label-description">This project is publicly available
-							and licensed under terms that allow others to use, modify, and distribute it (e.g.
-							github.com)</span></label>
+						<label class="usa-radio__label" for="check-open-source">Open Source
+							<span class="usa-checkbox__label-description">This project is publicly available
+								and licensed under terms that allow others to use, modify, and distribute it (e.g.
+								github.com)</span></label>
 					</div>
 					<div class="usa-radio">
 						<input class="usa-radio__input usa-radio__input--tile" id="check-govt-reuse" type="radio"
 							name="exemption-condition" value="governmentWideReuse" />
-						<label class="usa-radio__label" for="check-govt-reuse">Government Wide Reuse</label>
-						<span class="usa-checkbox__label-description">The project is available internally for government
-							wide use (e.g. github.cms.gov)</span></label>
+						<label class="usa-radio__label" for="check-govt-reuse">Government Wide Reuse
+							<span class="usa-checkbox__label-description">The project is available internally for
+								government wide use (e.g. github.cms.gov)</span></label>
 					</div>
 					<div class="usa-radio">
 						<input class="usa-radio__input usa-radio__input--tile" id="check-exempt" type="radio"
 							name="exemption-condition" value="exempt" />
-						<label class="usa-radio__label" for="check-exempt">None of the above</label>
-						<span class="usa-checkbox__label-description">The project may be considered exempted from
-							sharing and reuse as per the SHARE IT Act and M-16-21. </span></label>
+						<label class="usa-radio__label" for="check-exempt">None of the above
+							<span class="usa-checkbox__label-description">The project may be considered exempted from
+								sharing and reuse as per the SHARE IT Act and M-16-21. </span></label>
 					</div>
 				</fieldset>
-				<button type="button" id="start" onclick="determineExemptions(event)">Submit</button>
+
+				<button class="usa-button" type="button" id="start" onclick="determineExemptions(event)">Submit</button>
 			</div>
 		</div>
 		<div class="results" style="display: none;">
 			<div class="results-container">
-				<p class="exemption-result">Your project </p>
+				<div class="exemption-result"></div>
 			</div>
-			<button id="start" onclick="handleClick(event)">Try Again</button>
+			<button class="usa-button usa-button--unstyled" id="start" onclick="handleClick(event)">Try Again</button>
 		</div>
 	</div>
 
@@ -180,14 +163,15 @@
 						<label class="usa-checkbox__label" for="share-it-act-check-none">None of the above </label>
 					</div>
 				</fieldset>
-				<button type="button" id="share-it-act" onclick="determineExemptions(event)">Submit</button>
+				<button class="usa-button" type="button" id="share-it-act"
+					onclick="determineExemptions(event)">Submit</button>
 			</div>
 		</div>
 		<div class="results" style="display: none;">
 			<div class="results-container">
 				<p class="exemption-result">Your project </p>
 			</div>
-			<button id="share-it-act" onclick="handleClick(event)">Next</button>
+			<button class="usa-button" id="share-it-act" onclick="handleClick(event)">Next</button>
 		</div>
 	</div>
 
@@ -248,14 +232,15 @@
 						<label class="usa-checkbox__label" for="m-16-21-check-none">None of the above </label>
 					</div>
 				</fieldset>
-				<button type="button" id="m-16-21" onclick="determineExemptions(event)">Submit</button>
+				<button class="usa-button" type="button" id="m-16-21"
+					onclick="determineExemptions(event)">Submit</button>
 			</div>
 		</div>
 		<div class="results" style="display: none;">
 			<div class="results-container">
 				<p class="exemption-result">Your project </p>
 			</div>
-			<button id="m-16-21" onclick="handleClick(event)">Try Again</button>
+			<button class="usa-button" id="m-16-21" onclick="handleClick(event)">Try Again</button>
 		</div>
 	</div>
 
@@ -275,7 +260,7 @@
 	<div id="form-subheader">
 		<div class="step-header">
 			<div class="step-number">3</div>
-			<h3>Complete the entire form to generate the code.json file</h3>
+			<h2>Complete the entire form to generate the code.json file</h2>
 		</div>
 	</div>
 	<br>
