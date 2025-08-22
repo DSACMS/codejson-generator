@@ -251,11 +251,19 @@
 	</div>
 
 	<div id="auto-generation">
-		<p id="auto-generation-header"></p>
+		<div class="auto-generation-header">
+			<div class="step-header">
+				<div class="step-number">2</div>
+				<h2>Auto Generate Fields</h2>
+			</div>
+			<h4 id="quiz-subheading"> Enter your repository's GitHub URL in order to automatically pre-fill some of the
+				fields in this form </h4>
+			<p><i>This currently only works on <b>public</b> repositories</i></p>
+		</div>
 		<form id="github-url-form">
-			<label for="repo-url">GitHub Repository URL</label><br>
-			<input type="text" id="repo-url" name="repo-url"><br>
-			<input type="submit" id="repo-url-button" value="Submit">
+			<label class="usa-label" for="repo-url">GitHub Repository URL</label>
+			<input class="usa-input" id="repo-url" name="repo-url" />
+			<button class="usa-button" type="submit" id="repo-url-button">Submit</button>
 		</form>
 	</div>
 

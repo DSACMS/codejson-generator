@@ -254,11 +254,6 @@ function createFormHeading(title, description) {
 	`;
 }
 
-function createAutoGenerationBox() {
-	const container = document.getElementById("auto-generation-header")
-	container.innerHTML = `<div class="step-header"><div class="step-number">2</div><h2>Auto Generate Fields</h2></div><h4 id="quiz-subheading"> Enter your repository's GitHub URL in order to automatically pre-fill some of the fields in this form </h4> \n <p> <i>This currently only works on <b>public</b> repositories</i> </p>`
-}
-
 // Iterates through each json field and creates component array for Form.io
 function createAllComponents(schema, prefix = "") {
 	let components = [];
@@ -305,7 +300,6 @@ async function createFormComponents() {
 	console.log("JSON Data:", jsonData);
 
 	createFormHeading(jsonData["title"], jsonData["description"]);
-	createAutoGenerationBox()
 
 	components = createAllComponents(jsonData);
 
