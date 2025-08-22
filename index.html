@@ -79,7 +79,8 @@
 					</div>
 				</fieldset>
 
-				<button class="usa-button" type="button" id="start" onclick="determineExemptions(event)">Submit</button>
+				<button class="usa-button margin-top-2" type="button" id="start"
+					onclick="determineExemptions(event)">Submit</button>
 			</div>
 		</div>
 		<div class="results" style="display: none;">
@@ -94,7 +95,7 @@
 		<div class="exemptions-header">
 			<div class="step-header">
 				<div class="step-number">1b</div>
-				<h3>Is my project exempted from the SHARE IT Act?</h3>
+				<h2>Is my project exempted from the SHARE IT Act?</h2>
 			</div>
 		</div>
 		<div id="exemptions-quiz-container" class="exemptions-quiz-container">
@@ -163,13 +164,13 @@
 						<label class="usa-checkbox__label" for="share-it-act-check-none">None of the above </label>
 					</div>
 				</fieldset>
-				<button class="usa-button" type="button" id="share-it-act"
+				<button class="usa-button margin-top-2" type="button" id="share-it-act"
 					onclick="determineExemptions(event)">Submit</button>
 			</div>
 		</div>
 		<div class="results" style="display: none;">
 			<div class="results-container">
-				<p class="exemption-result">Your project </p>
+				<div class="exemption-result"></div>
 			</div>
 			<button class="usa-button" id="share-it-act" onclick="handleClick(event)">Next</button>
 		</div>
@@ -179,7 +180,7 @@
 		<div class="exemptions-header">
 			<div class="step-header">
 				<div class="step-number">1c</div>
-				<h3>Is my project exempted from M-16-21?</h3>
+				<h2>Is my project exempted from M-16-21?</h2>
 			</div>
 		</div>
 		<div class="exemptions-quiz-container">
@@ -232,15 +233,16 @@
 						<label class="usa-checkbox__label" for="m-16-21-check-none">None of the above </label>
 					</div>
 				</fieldset>
-				<button class="usa-button" type="button" id="m-16-21"
+				<button class="usa-button margin-top-2" type="button" id="m-16-21"
 					onclick="determineExemptions(event)">Submit</button>
 			</div>
 		</div>
 		<div class="results" style="display: none;">
 			<div class="results-container">
-				<p class="exemption-result">Your project </p>
+				<div class="exemption-result"></div>
 			</div>
-			<button class="usa-button" id="m-16-21" onclick="handleClick(event)">Try Again</button>
+			<button class="usa-button usa-button--unstyled" id="m-16-21" onclick="handleClick(event)">Try
+				Again</button>
 		</div>
 	</div>
 
