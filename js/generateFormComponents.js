@@ -54,7 +54,10 @@ function determineType(field) {
 		return "integer";
 	} else if (field.type === "boolean") {
 		return "select-boolean";
-	} else if (field.type === "string" || field.type.includes("string")) {
+	} else if (field.type === "content") {
+		return "content";
+	}
+	else if (field.type === "string" || field.type.includes("string")) {
 		if (field.format == "date-time") {
 			return "datetime";
 		}
@@ -65,6 +68,7 @@ function determineType(field) {
 // Creates Form.io component based on json field type
 function createComponent(fieldName, fieldObject, requiredArray) {
 	const componentType = determineType(fieldObject);
+	console.log(componentType, "type determined");
 	const validate = determineValidation(fieldName, fieldObject, requiredArray);
 	switch (componentType) {
 		case "textfield":
@@ -239,6 +243,17 @@ function createComponent(fieldName, fieldObject, requiredArray) {
 				components: [],
 				validate
 			};
+		case "content":
+			return {
+				html: `<p class="margin-top-neg-3 margin-bottom-4 text-base-dark">${fieldObject["content"]}</p>`,
+				label: fieldName,
+				customClass: fieldObject["className"],
+				refreshOnChange: false,
+				key: fieldName,
+				type: "content",
+				input: false,
+				tableView: false
+			};
 		default:
 			break;
 	}
@@ -282,6 +297,18 @@ function createAllComponents(schema, prefix = "") {
 			}
 
 			components.push(fieldComponent);
+
+			// Add description below all object fields 
+			if (fieldComponent.type === "datagrid") {
+				const labelKey = `${key}-description`;
+				const label = {
+					type: "content",
+					content: value.description,
+					className: ".margin-bottom-neg-205"
+				}
+				const labelComponent = createComponent(labelKey, label, []);
+				components.push(labelComponent);
+			}
 		}
 	}
 
