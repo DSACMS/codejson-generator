@@ -54,7 +54,10 @@ function determineType(field) {
 		return "integer";
 	} else if (field.type === "boolean") {
 		return "select-boolean";
-	} else if (field.type === "string" || field.type.includes("string")) {
+	} else if (field.type === "content") {
+		return "content";
+	}
+	else if (field.type === "string" || field.type.includes("string")) {
 		if (field.format == "date-time") {
 			return "datetime";
 		}
@@ -65,6 +68,7 @@ function determineType(field) {
 // Creates Form.io component based on json field type
 function createComponent(fieldName, fieldObject, requiredArray) {
 	const componentType = determineType(fieldObject);
+	console.log(componentType, "type determined");
 	const validate = determineValidation(fieldName, fieldObject, requiredArray);
 	switch (componentType) {
 		case "textfield":
@@ -239,6 +243,17 @@ function createComponent(fieldName, fieldObject, requiredArray) {
 				components: [],
 				validate
 			};
+		case "content":
+			return {
+				html: `<p class="margin-top-neg-3 margin-bottom-4 text-base-dark">${fieldObject["content"]}</p>`,
+				label: fieldName,
+				customClass: fieldObject["className"],
+				refreshOnChange: false,
+				key: fieldName,
+				type: "content",
+				input: false,
+				tableView: false
+			};
 		default:
 			break;
 	}
@@ -252,11 +267,6 @@ function createFormHeading(title, description) {
 	<h2>${description}</h2>\n
 	<h3>Complete the form below to create a code.json file for your project:</h3>\n
 	`;
-}
-
-function createAutoGenerationBox() {
-	const container = document.getElementById("auto-generation-header")
-	container.innerHTML = `<div class="step-header"><div class="step-number">2</div><h3>Auto Generate Fields</h3></div> \n <h4> Please enter your repositories GitHub URL in order to automatically pre-fill some of the fields in this form! </h4> \n <h6> <i>This currently only works on <b>public</b> repositories</i> </h6>`
 }
 
 // Iterates through each json field and creates component array for Form.io
@@ -287,6 +297,18 @@ function createAllComponents(schema, prefix = "") {
 			}
 
 			components.push(fieldComponent);
+
+			// Add description below all object fields 
+			if (fieldComponent.type === "datagrid") {
+				const labelKey = `${key}-description`;
+				const label = {
+					type: "content",
+					content: value.description,
+					className: ".margin-bottom-neg-205"
+				}
+				const labelComponent = createComponent(labelKey, label, []);
+				components.push(labelComponent);
+			}
 		}
 	}
 
@@ -305,7 +327,6 @@ async function createFormComponents() {
 	console.log("JSON Data:", jsonData);
 
 	createFormHeading(jsonData["title"], jsonData["description"]);
-	createAutoGenerationBox()
 
 	components = createAllComponents(jsonData);
 

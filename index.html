@@ -1,29 +1,20 @@
-<html>
+<html lang="en-US">
+<meta charset="UTF-8">
 
 <head>
-	<meta charset="utf-8">
-	<!-- USWDS not working -->
-	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-	<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uswds/2.11.2/css/uswds.min.css"> -->
-	<!-- <link rel="stylesheet" href="https://cdn.form.io/formiojs/formio.form.min.css"> -->
-	<!-- <link rel="stylesheet" href="https://cdn.form.io/uswds/uswds.min.css"> -->
-	<!-- <link rel="stylesheet" href="https://unpkg.com/formiojs@3.0.0-alpha.13/dist/formio.full.min.css"> -->
-	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/uswds/2.11.2/js/uswds.min.js"></script> -->
-	<!-- <script src="https://cdn.form.io/formiojs/formio.form.min.js"></script> -->
-	<!-- <script src="https://cdn.form.io/uswds/uswds.min.js"></script> -->
-	<!-- <script src="https://cdn.form.io/formiojs/formio.full.js"></script> -->
-	<!-- <script src="https://cdn.form.io/js/formio.embed.js"></script> -->
-
+	<title>code.json metadata</title>
 	<link rel="icon" type="image/x-icon" href="favicon.ico">
-
-	<!-- Uses bootstrap for now -->
-	<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
 	<link rel="stylesheet" href="css/styles.css">
 
-	<!-- Working Form.io CDN -->
-	<script src="https://unpkg.com/formiojs@4.21.6/dist/formio.full.min.js"></script>
-	<link href="https://cdn.jsdelivr.net/npm/formiojs@4.21.6/dist/formio.full.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uswds/3.1.0/css/uswds.min.css">
+	<link rel="stylesheet" href="https://cdn.form.io/js/formio.form.min.css">
+	<link rel="stylesheet" href="https://cdn.form.io/uswds/uswds.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/uswds/3.1.0/js/uswds.min.js"></script>
+	<script src="https://cdn.form.io/js/formio.form.min.js"></script>
+	<script src="https://cdn.form.io/uswds/uswds.min.js"></script>
+
+	<link rel="icon" type="image/x-icon" href="favicon.ico">
 
 	<!-- Render the form -->
 	<script src="js/generateFormComponents.js"></script>
@@ -33,20 +24,14 @@
 	<script type="text/javascript">
 		createFormComponents()
 			.then((components) => {
+				Formio.use(uswds);
 				Formio.createForm(document.getElementById("formio"), {
 					display: "form",
-					theme: "primary",
-					settings: {
-						pdf: {
-							id: "1ec0f8ee-6685-5d98-a847-26f67b67d6f0",
-							src: "https://files.form.io/pdf/5692b91fd1028f01000407e3/file/1ec0f8ee-6685-5d98-a847-26f67b67d6f0",
-						},
-					},
 					components: components,
 				}).then(function (form) {
 					window.formIOInstance = form;
 					form.on("submit", function (submission) {
-						console.log("form submission here:", submission);
+						console.log("Form Submission here:", submission);
 						createCodeJson(submission.data);
 					});
 				});
@@ -59,16 +44,16 @@
 
 <body>
 	<div id="form-header"></div>
-
+	<!-- Exemptions Quiz: Simple Classification -->
 	<div class="exemptions" id="start">
 		<div class="exemptions-header">
 			<div class="step-header">
 				<div class="step-number">1</div>
-				<h3>Identify your project's classification</h3>
+				<h2>Identify your project's classification</h2>
 			</div>
 		</div>
 		<div id="exemptions-quiz-container" class="exemptions-quiz-container">
-			<h4 id="quiz-subheading">
+			<h4 class="usa-heading margin-top-neg-05 margin-bottom-1" id="quiz-subheading">
 				My project is considered:
 			</h4>
 			<div id="exemptions-quiz">
@@ -76,46 +61,49 @@
 					<div class="usa-radio">
 						<input class="usa-radio__input usa-radio__input--tile" id="check-open-source" type="radio"
 							name="exemption-condition" value="openSource" />
-						<label class="usa-radio__label" for="check-open-source">Open Source</label>
-						<span class="usa-checkbox__label-description">This project is publicly available
-							and licensed under terms that allow others to use, modify, and distribute it (e.g.
-							github.com)</span></label>
+						<label class="usa-radio__label" for="check-open-source">Open Source
+							<span class="usa-checkbox__label-description">This project is publicly available
+								and licensed under terms that allow others to use, modify, and distribute it (e.g.
+								github.com)</span></label>
 					</div>
 					<div class="usa-radio">
 						<input class="usa-radio__input usa-radio__input--tile" id="check-govt-reuse" type="radio"
 							name="exemption-condition" value="governmentWideReuse" />
-						<label class="usa-radio__label" for="check-govt-reuse">Government Wide Reuse</label>
-						<span class="usa-checkbox__label-description">The project is available internally for government
-							wide use (e.g. github.cms.gov)</span></label>
+						<label class="usa-radio__label" for="check-govt-reuse">Government Wide Reuse
+							<span class="usa-checkbox__label-description">The project is available internally for
+								government wide use (e.g. github.cms.gov)</span></label>
 					</div>
 					<div class="usa-radio">
 						<input class="usa-radio__input usa-radio__input--tile" id="check-exempt" type="radio"
 							name="exemption-condition" value="exempt" />
-						<label class="usa-radio__label" for="check-exempt">None of the above</label>
-						<span class="usa-checkbox__label-description">The project may be considered exempted from
-							sharing and reuse as per the SHARE IT Act and M-16-21. </span></label>
+						<label class="usa-radio__label" for="check-exempt">None of the above
+							<span class="usa-checkbox__label-description">The project may be considered exempted from
+								sharing and reuse as per the SHARE IT Act and M-16-21. </span></label>
 					</div>
 				</fieldset>
-				<button type="button" id="start" onclick="determineExemptions(event)">Submit</button>
+
+				<button class="usa-button margin-top-2" type="button" id="start"
+					onclick="determineExemptions(event)">Submit</button>
 			</div>
 		</div>
 		<div class="results" style="display: none;">
 			<div class="results-container">
-				<p class="exemption-result">Your project </p>
+				<div class="exemption-result"></div>
 			</div>
-			<button id="start" onclick="handleClick(event)">Try Again</button>
+			<button class="usa-button usa-button--unstyled" id="start" onclick="handleClick(event)">Try Again</button>
 		</div>
 	</div>
 
+	<!-- Exemptions Quiz: SHARE IT Act -->
 	<div class="exemptions" id="share-it-act" style="display: none;">
 		<div class="exemptions-header">
 			<div class="step-header">
 				<div class="step-number">1b</div>
-				<h3>Is my project exempted from the SHARE IT Act?</h3>
+				<h2>Is my project exempted from the SHARE IT Act?</h2>
 			</div>
 		</div>
 		<div id="exemptions-quiz-container" class="exemptions-quiz-container">
-			<h4 id="quiz-subheading">
+			<h4 class="usa-heading margin-top-neg-05 margin-bottom-1" id="quiz-subheading">
 				Answer the series of questions below to determine if your project falls under the exemption categories
 				according to the SHARE IT Act.
 			</h4>
@@ -180,26 +168,28 @@
 						<label class="usa-checkbox__label" for="share-it-act-check-none">None of the above </label>
 					</div>
 				</fieldset>
-				<button type="button" id="share-it-act" onclick="determineExemptions(event)">Submit</button>
+				<button class="usa-button margin-top-2" type="button" id="share-it-act"
+					onclick="determineExemptions(event)">Submit</button>
 			</div>
 		</div>
 		<div class="results" style="display: none;">
 			<div class="results-container">
-				<p class="exemption-result">Your project </p>
+				<div class="exemption-result"></div>
 			</div>
-			<button id="share-it-act" onclick="handleClick(event)">Next</button>
+			<button class="usa-button" id="share-it-act" onclick="handleClick(event)">Next</button>
 		</div>
 	</div>
 
+	<!-- Exemptions Quiz: M-16-21 -->
 	<div class="exemptions" id="m-16-21" style="display: none;">
 		<div class="exemptions-header">
 			<div class="step-header">
 				<div class="step-number">1c</div>
-				<h3>Is my project exempted from M-16-21?</h3>
+				<h2>Is my project exempted from M-16-21?</h2>
 			</div>
 		</div>
 		<div class="exemptions-quiz-container">
-			<h4 id="quiz-subheading">
+			<h4 class="usa-heading margin-top-neg-05 margin-bottom-1" id="quiz-subheading">
 				Answer the series of questions below to determine if your project falls under the exemption categories
 				according to M-16-21 Act.
 			</h4>
@@ -248,48 +238,72 @@
 						<label class="usa-checkbox__label" for="m-16-21-check-none">None of the above </label>
 					</div>
 				</fieldset>
-				<button type="button" id="m-16-21" onclick="determineExemptions(event)">Submit</button>
+				<button class="usa-button margin-top-2" type="button" id="m-16-21"
+					onclick="determineExemptions(event)">Submit</button>
 			</div>
 		</div>
 		<div class="results" style="display: none;">
 			<div class="results-container">
-				<p class="exemption-result">Your project </p>
+				<div class="exemption-result"></div>
 			</div>
-			<button id="m-16-21" onclick="handleClick(event)">Try Again</button>
+			<button class="usa-button usa-button--unstyled" id="m-16-21" onclick="handleClick(event)">Try
+				Again</button>
 		</div>
 	</div>
 
-	<div id="notification" style="display: none;">
-		<p id="notification-message"></p>
+	<!-- Field Auto-Generation Notification -->
+	<div class="usa-alert" id="notification" style="display:none;">
+		<div class="usa-alert__body">
+			<h4 class="usa-alert__heading"></h4>
+			<p class="usa-alert__text" id="notification-message"></p>
+		</div>
 	</div>
 
-	<div id="auto-generation">
-		<p id="auto-generation-header"></p>
+	<!-- Field Auto-Generation -->
+	<div class="auto-generation">
+		<div class="auto-generation-header">
+			<div class="step-header">
+				<div class="step-number">2</div>
+				<h2>Auto Generate Fields</h2>
+			</div>
+			<h4 class="usa-heading margin-top-neg-05 margin-bottom-1" id="quiz-subheading"> Enter your repository's
+				GitHub URL in order to automatically pre-fill some of the
+				fields in this form </h4>
+			<p><i>This currently only works on <b>public</b> repositories</i></p>
+		</div>
 		<form id="github-url-form">
-			<label for="repo-url">GitHub Repository URL</label><br>
-			<input type="text" id="repo-url" name="repo-url"><br>
-			<input type="submit" id="repo-url-button" value="Submit">
+			<label class="usa-label" for="repo-url">GitHub Repository URL</label>
+			<input class="usa-input" id="repo-url" name="repo-url" />
+			<button class="usa-button margin-top-2" id="repo-url-button">Submit</button>
 		</form>
 	</div>
 
+	<!-- Form header -->
 	<div id="form-subheader">
 		<div class="step-header">
 			<div class="step-number">3</div>
-			<h3>Complete the entire form to generate the code.json file</h3>
+			<h2>Complete the entire form to generate the code.json file</h2>
 		</div>
 	</div>
-	<br>
 
 	<div id="formio"></div>
 
+	<!-- code.json Generated Output -->
 	<div id="output">
-		<label for="json-result">Your JSON Metadata </label>
-		<textarea class="form-control" rows="10" id="json-result" readonly></textarea>
-		<button type="button" class="btn btn-outline" href="#" onclick="copyToClipboard(event)">Copy</button>
-		<button type="button" class="btn btn-outline" href="#" onclick="downloadFile(event)">Download</button>
-		<button type="button" class="btn btn-outline" href="#" onclick="createProjectPR(event)">Create Pull
-			Request</button>
-		<button type="button" class="btn btn-outline" href="#" onclick="emailFile(event)">Email</button>
+		<label class="usa-label" for="json-result"><strong>Your code.json metadata</strong></label>
+		<textarea class="usa-textarea" rows="30" id="json-result" name="json-result" readonly></textarea>
+		<div class="button-actions">
+			<button class="usa-button usa-button--outline" type="button" href="#"
+				onclick="copyToClipboard(event)">Copy</button>
+			<button class="usa-button usa-button--outline" type="button" href="#"
+				onclick="downloadFile(event)">Download</button>
+			<button class="usa-button usa-button--outline" type="button" href="#"
+				onclick="createProjectPR(event)">Create
+				Pull
+				Request</button>
+			<button class="usa-button usa-button--outline" type="button" href="#"
+				onclick="emailFile(event)">Email</button>
+		</div>
 	</div>
 
 </body>
