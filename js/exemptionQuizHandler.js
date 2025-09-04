@@ -28,7 +28,7 @@ function determineResults(checkedValues, legislationName) {
     // Project is not exempt - simple quiz
     if (legislationName == "start") {
         if (checkedValues[0] !== "exempt") {
-            text = `<h4 class="usa-heading margin-top-neg-05">Your project is qualified for sharing and reuse according to the SHARE IT Act and M-16-21.</h4>
+            text = `<h3 class="usa-heading margin-top-neg-05">Your project is qualified for sharing and reuse according to the SHARE IT Act and M-16-21.</h3>
                 <p>We've marked this in the form below for you as: <strong>${checkedValues[0]}</strong></p>`
         }
     }
@@ -37,11 +37,11 @@ function determineResults(checkedValues, legislationName) {
     else if ((checkedValues.length === 1 && checkedValues[0].includes("none")) || checkedValues.length === 0) {
 
         if (legislationName === "share-it-act") {
-            text = `<h4 class="usa-heading margin-top-neg-05">Your project is: <div class="not-exempt"><strong>NOT EXEMPTED</strong></div></h4>
+            text = `<h3 class="usa-heading margin-top-neg-05">Your project is: <div class="not-exempt"><strong>NOT EXEMPTED</strong></div></h3>
                 <p>Please complete <strong>Part 1c</strong> to determine additional project exemptions.</p>`;
         }
         else {
-            text = `<h4 class="usa-heading margin-top-neg-05">Your project is: <div class="not-exempt"><strong>NOT EXEMPTED</strong></div></h4>
+            text = `<h3 class="usa-heading margin-top-neg-05">Your project is: <div class="not-exempt"><strong>NOT EXEMPTED</strong></div></h3>
                 <p>If your project is NOT exempted from both M-16-21 AND the SHARE IT Act, please mark the following on the form: </p>
                 <p>If your repository is public, mark <code>usageType</code> as <strong>openSource</strong>.</p>
                 <p>If your repository is private, mark <code>usageType</code> as <strong>governmentWideReuse</strong>.</p>`;
@@ -50,7 +50,7 @@ function determineResults(checkedValues, legislationName) {
     // Project is exempted
     else {
         const selections = checkedValues.join(", ");
-        text = `<h4 class="usa-heading margin-top-neg-05">Your project is: <strong>EXEMPTED</strong></h4>
+        text = `<h3 class="usa-heading margin-top-neg-05">Your project is: <strong>EXEMPTED</strong></h3>
                 <p>We've marked this in the form below for you as: <strong>${selections}</strong></p>
                 <p>Be sure to include a 1–2 sentence justification in the <code>exemptionText</code> field to support the exemption determination.</p>`;
     }
