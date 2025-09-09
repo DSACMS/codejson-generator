@@ -279,10 +279,9 @@ async function preFillFields(repoData, languages) {
             feedbackComp.setValue(issuesUrl)
         }
 
-        // Update upstream 
-
-        if (form.getComponent('upstream') && repoData.html_url) {
-            const upstreamComp = form.getComponent('upstream');
+        // Update SBOM
+        if (form.getComponent('SBOM') && repoData.html_url) {
+            const upstreamComp = form.getComponent('SBOM');
             const urlParts = repoData.html_url.split('/')
 
             if (urlParts.length >= 2) {
