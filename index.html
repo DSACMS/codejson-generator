@@ -1,5 +1,6 @@
 <html lang="en-US">
 <meta charset="UTF-8">
+<meta name="description" content="Form to generate a code.json file containing repository metadata">
 
 <head>
 	<title>code.json metadata</title>
@@ -24,6 +25,7 @@
 	<script type="text/javascript">
 		createFormComponents()
 			.then((components) => {
+				console.log(components, 'components');
 				Formio.use(uswds);
 				Formio.createForm(document.getElementById("formio"), {
 					display: "form",
