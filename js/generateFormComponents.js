@@ -66,23 +66,24 @@ function determineType(field) {
 }
 
 // Creates Form.io component based on json field type
-function createComponent(fieldName, fieldObject, requiredArray) {
+function createComponent(fieldName, fieldObject, requiredArray, prefix) {
 	const componentType = determineType(fieldObject);
 	console.log(componentType, "type determined");
 	const validate = determineValidation(fieldName, fieldObject, requiredArray);
+	const label = !validate.required && !prefix ? fieldName + " (optional)" : fieldName;
 	switch (componentType) {
 		case "textfield":
 			return {
 				type: "textfield",
 				key: fieldName,
-				label: fieldName,
+				label: label,
 				input: true,
 				description: fieldObject["description"],
 				validate
 			};
 		case "tags":
 			return {
-				label: fieldName,
+				label: label,
 				tableView: false,
 				storeas: "array",
 				validateWhenHidden: false,
@@ -94,7 +95,7 @@ function createComponent(fieldName, fieldObject, requiredArray) {
 			};
 		case "number":
 			return {
-				label: fieldName,
+				label: label,
 				applyMaskOn: "change",
 				mask: false,
 				tableView: false,
@@ -111,7 +112,7 @@ function createComponent(fieldName, fieldObject, requiredArray) {
 			};
 		case "integer":
 			return {
-				label: fieldName,
+				label: label,
 				applyMaskOn: "change",
 				mask: false,
 				tableView: false,
@@ -131,7 +132,7 @@ function createComponent(fieldName, fieldObject, requiredArray) {
 			var options = transformArrayToOptions(fieldObject.enum);
 			console.log("checking options here:", options);
 			return {
-				label: fieldName,
+				label: label,
 				optionsLabelPosition: "right",
 				inline: false,
 				tableView: false,
@@ -147,7 +148,7 @@ function createComponent(fieldName, fieldObject, requiredArray) {
 			var options = transformArrayToOptions(fieldObject.items.enum);
 			console.log("checking options here:", options);
 			return {
-				label: fieldName,
+				label: label,
 				optionsLabelPosition: "right",
 				tableView: false,
 				values: options,
@@ -161,7 +162,7 @@ function createComponent(fieldName, fieldObject, requiredArray) {
 			};
 		case "datetime":
 			return {
-				label: fieldName,
+				label: label,
 				tableView: false,
 				datePicker: {
 					disableWeekends: false,
@@ -189,7 +190,7 @@ function createComponent(fieldName, fieldObject, requiredArray) {
 			};
 		case "select-boolean":
 			return {
-				label: fieldName,
+				label: label,
 				widget: "html5",
 				tableView: true,
 				data: {
@@ -213,7 +214,7 @@ function createComponent(fieldName, fieldObject, requiredArray) {
 			};
 		case "container":
 			return {
-				label: fieldName,
+				label: label,
 				hideLabel: false,
 				tableView: false,
 				validateWhenHidden: false,
@@ -226,7 +227,7 @@ function createComponent(fieldName, fieldObject, requiredArray) {
 			};
 		case "datagrid":
 			return {
-				label: fieldName,
+				label: label,
 				reorder: false,
 				addAnotherPosition: "bottom",
 				layoutFixed: false,
@@ -246,7 +247,7 @@ function createComponent(fieldName, fieldObject, requiredArray) {
 		case "content":
 			return {
 				html: `<p class="margin-top-neg-3 margin-bottom-4 text-base-dark">${fieldObject["content"]}</p>`,
-				label: fieldName,
+				label: label,
 				customClass: fieldObject["className"],
 				refreshOnChange: false,
 				key: fieldName,
@@ -287,7 +288,7 @@ function createAllComponents(schema, prefix = "") {
 			console.log("key at play:", key);
 			const fullKey = prefix ? `${prefix}.${key}` : key;
 
-			let fieldComponent = createComponent(key, value, requiredArray);
+			let fieldComponent = createComponent(key, value, requiredArray, prefix);
 
 			if (fieldComponent.type === "container") {
 				fieldComponent.components = createAllComponents(value, fullKey);
