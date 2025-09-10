@@ -261,11 +261,20 @@ function createComponent(fieldName, fieldObject, requiredArray, prefix) {
 }
 
 // Adds heading containing schema information
-function createFormHeading(title, description) {
+function createFormHeading(agency) {
+	const agencyTitle = (agency === "gov") ? agency.charAt(0).toUpperCase() + agency.slice(1) : agency.toUpperCase();
+	const agencyDescription = (agency !== "gov") ? agencyTitle : agency;
+
 	const container = document.getElementById('form-header');
 	container.innerHTML = `
-	<h1>${title}</h1>\n
-	<h2>${description}</h2>\n
+	<h1>Welcome to ${agencyTitle} Code.json Generator!</h1>\n
+	<h2>code.json generator is a web form designed to help ${agencyDescription} teams create a code.json file containing project metadata in compliance with the SHARE IT Act. 
+	Visit the <a
+    				class="usa-link usa-link--external"
+    				rel="noreferrer"
+    				target="_blank"
+    				href="https://dsacms.github.io/share-it-act-lp/">
+					SHARE IT Act Landing Page</a> for more information.</h2>\n
 	<h3>Complete the form below to create a code.json file for your project:</h3>\n
 	`;
 }
@@ -327,7 +336,7 @@ async function createFormComponents() {
 	const jsonData = await retrieveFile(filePath);
 	console.log("JSON Data:", jsonData);
 
-	createFormHeading(jsonData["title"], jsonData["description"]);
+	createFormHeading(page);
 
 	components = createAllComponents(jsonData);
 
