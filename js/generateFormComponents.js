@@ -68,7 +68,6 @@ function determineType(field) {
 // Creates Form.io component based on json field type
 function createComponent(fieldName, fieldObject, requiredArray, prefix) {
 	const componentType = determineType(fieldObject);
-	console.log(componentType, "type determined");
 	const validate = determineValidation(fieldName, fieldObject, requiredArray);
 	const label = !validate.required && !prefix ? fieldName + " (optional)" : fieldName;
 	switch (componentType) {
@@ -363,10 +362,6 @@ async function createFormComponents() {
 		input: true,
 		tableView: false,
 	});
-
-
-
-	console.log(components);
 
 	return components;
 }

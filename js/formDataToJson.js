@@ -290,7 +290,6 @@ async function createProjectPR(event) {
 		console.error("No API key found!");
 		alert("No API Key in submitted data! Please provide an API key");
 	}
-	//console.log(codeJSONObj)
 }
 
 // Triggers local file download
