@@ -37,6 +37,14 @@ function getSelectedOptions(options) {
 	return selectedOptions;
 }
 
+function isEmptyObject(obj) {
+	return Object.values(obj).every(value =>
+		value === "" ||
+		value === null ||
+		value === undefined
+	);
+}
+
 // Populates fields with form data
 function populateObject(data, fields) {
 	let reorderedObject = {}
@@ -45,7 +53,7 @@ function populateObject(data, fields) {
 		let value = data[field];
 
 		// Does not assign optional properties with blank values
-		if (value == null || value === "") {
+		if (value == null || value === "" || (Array.isArray(value) && typeof value[0] === 'object' && isEmptyObject(value[0]))) {
 			continue;
 		}
 
