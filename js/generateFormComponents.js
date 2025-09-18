@@ -262,19 +262,28 @@ function createComponent(fieldName, fieldObject, requiredArray, prefix) {
 // Adds heading containing schema information
 function createFormHeading(agency) {
 	const agencyTitle = (agency === "gov") ? agency.charAt(0).toUpperCase() + agency.slice(1) : agency.toUpperCase();
-	const agencyDescription = (agency !== "gov") ? agencyTitle : agency;
+	const agencyDescription = (agency !== "gov") ? agencyTitle : "government";
 
 	const container = document.getElementById('form-header');
 	container.innerHTML = `
 	<h1>Welcome to ${agencyTitle} Code.json Generator!</h1>\n
-	<h2>code.json generator is a web form designed to help ${agencyDescription} teams create a code.json file containing project metadata in compliance with the SHARE IT Act. 
-	Visit the <a
+	<p><strong>code.json generator</strong> is a web form designed to help ${agencyDescription} teams create a code.json file containing project metadata in compliance with the SHARE IT Act.</p>\n
+	<p>Complete the form below to create a code.json file for your project.</p>\n
+	<p>Afterwards, the code.json file must be added to the repository. To save the file, you can: 
+		<ul>
+			<li>copy its contents</li> 
+			<li>download the file locally</li> 
+			<li>create a pull request to the repository</li> 
+			<li>email the file</li>
+		</ul>
+	</p>\n
+	<p>Visit the <a
     				class="usa-link usa-link--external"
     				rel="noreferrer"
     				target="_blank"
     				href="https://dsacms.github.io/share-it-act-lp/">
-					SHARE IT Act Landing Page</a> for more information.</h2>\n
-	<h3>Complete the form below to create a code.json file for your project:</h3>\n
+					SHARE IT Act Landing Page</a> for more information.
+	</p>
 	`;
 }
 
