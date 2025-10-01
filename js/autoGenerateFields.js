@@ -257,7 +257,7 @@ async function preFillFields(repoData, languages) {
 
             currentDate.created = repoData.created_at;
             currentDate.lastModified = repoData.updated_at
-            currentDate.metaDataLastUpdated = new Date().toISOString()
+            currentDate.metadataLastUpdated = new Date().toISOString()
 
             dateComp.setValue(currentDate)
         }
