@@ -1,6 +1,7 @@
 {
   "name": "codejson-generator",
-  "description": "Form to generate a CMS code.json",
+  "version": "",
+  "description": "Form to generate code.json",
   "longDescription": "A web form where teams fill out information about their project and creates a completed code.json to add to repositories.",
   "status": "Production",
   "permissions": {
@@ -15,11 +16,14 @@
   },
   "organization": "Centers for Medicare & Medicaid Services",
   "repositoryURL": "https://github.com/DSACMS/codejson-generator",
-  "projectURL": "https://dsacms.github.io/codejson-generator/",
   "repositoryHost": "github.com/DSACMS",
   "repositoryVisibility": "public",
+  "homepageURL": "",
+  "downloadURL": "",
+  "disclaimerURL": "",
+  "disclaimerText": "",
   "vcs": "git",
-  "laborHours": 3702,
+  "laborHours": 4172,
   "reuseFrequency": {
     "forks": 7,
     "clones": 0
@@ -39,26 +43,25 @@
     "CSS"
   ],
   "maintenance": "internal",
-  "contractNumber": "",
+  "contractNumber": [],
+  "SBOM": "https://github.com/DSACMS/codejson-generator/network/dependencies",
+  "relatedCode": [],
+  "reusedCode": [],
+  "partners": [],
   "date": {
     "created": "2024-11-22T16:30:29Z",
-    "lastModified": "2025-06-06T17:26:23Z",
-    "metaDataLastUpdated": "2025-06-10T17:22:19.981Z"
+    "lastModified": "2025-10-07T16:56:24Z",
+    "metadataLastUpdated": "2025-10-30T20:35:02.333Z"
   },
   "tags": [
-    "codejson",
-    "compliance",
-    "OSPO",
-    "metadata",
-    "featured"
+    "dsacms-tier3"
   ],
   "contact": {
     "email": "opensource@cms.hhs.gov",
     "name": "CMS Open Source Team"
   },
-  "feedbackMechanisms": [
-    "https://github.com/DSACMS/codejson-generator/issues"
-  ],
+  "feedbackMechanism": "https://github.com/DSACMS/codejson-generator/issues",
+  "AIUseCaseID": "0",
   "localisation": false,
   "repositoryType": "website",
   "userInput": true,
@@ -66,7 +69,6 @@
   "group": "CMS/OA/DSAC",
   "projects": [],
   "systems": [],
-  "upstream": "https://github.com/DSACMS/codejson-generator/network/dependencies",
   "subsetInHealthcare": [
     "Operational"
   ],
