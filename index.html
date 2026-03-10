@@ -25,6 +25,10 @@
 	<script src="js/formDataToJson.js"></script>
 	<script src="js/exemptionQuizHandler.js"></script>
 	<script src="js/autoGenerateFields.js"></script>
+	
+	<!-- We participate in the US government's analytics program. See the data at analytics.usa.gov. -->
+	<script async type="text/javascript" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=HHS&subagency=CMS&sitetopic=metadata&siteplatform=GitHubPages" id="_fed_an_ua_tag"></script>
+
 	<script type="text/javascript">
 		createFormComponents()
 			.then((components) => {
@@ -34,11 +38,32 @@
 					components: components,
 				}).then(function (form) {
 					window.formIOInstance = form;
+
+					// form start must only fire once
+					let formStartFired = false;
+					form.on("focus", function () {
+						if (!formStartFired) {
+							formStartFired = true;
+							gas4('form_start', {
+								'form_name': 'code.json form',
+								'form_id': 'formio',
+								'form_destination': window.location.pathname
+							});
+						}
+					});
+
 					form.on("submit", function (submission) {
 						console.log("Form Submission here:", submission);
 						createCodeJson(submission.data);
+
+						gas4('form_submit', {
+							'form_name': 'code.json form',
+							'form_id': 'formio',
+							'form_destination': window.location.pathname,
+							'form_submit_text': 'Generate code.json metadata'
+						});
 					});
-				});
+				})
 			})
 			.catch((error) => {
 				console.error("Error creating components:", error);
@@ -292,6 +317,7 @@
 				indicates a required field</em></p>
 	</div>
 
+	<!-- Generated Form -->
 	<div id="formio"></div>
 
 	<!-- code.json Generated Output -->
