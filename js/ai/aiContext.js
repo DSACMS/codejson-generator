@@ -97,13 +97,22 @@
 
     const BOILERPLATE_HEADING = /^#{1,4}\s*(license|licence|code of conduct|contributing|security|contributors|acknowledge?ments?|table of contents|changelog|badges|citation)\b/i;
 
+    function stripHtmlCommentsFully(input) {
+        let previous;
+        let current = input;
+        do {
+            previous = current;
+            current = current.replace(/<!--[\s\S]*?-->/g, "");
+        } while (current !== previous);
+        return current;
+    }
+
     function condenseReadme(markdown, maxChars) {
         if (!markdown) {
             return "";
         }
 
-        let text = markdown
-            .replace(/<!--[\s\S]*?-->/g, "")
+        let text = stripHtmlCommentsFully(markdown)
             .replace(/^(.+)\n={3,}\s*$/gm, "# $1")
             .replace(/^(.+)\n-{3,}\s*$/gm, "## $1")
             .replace(/^\s*\[!\[[^\]]*\]\([^)]*\)\]\([^)]*\)\s*$/gm, "")
