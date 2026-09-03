@@ -40,22 +40,6 @@
         );
     }
 
-    async function getRootFiles(repoInfo) {
-        const endpoint = `https://api.github.com/repos/${repoInfo.organization}/${repoInfo.repository}/contents`;
-
-        try {
-            const response = await fetch(endpoint, ghHeaders());
-            if (!response.ok) {
-                return [];
-            }
-            const files = await response.json();
-            return Array.isArray(files) ? files : [];
-        } catch (error) {
-            console.error("Could not list repository root:", error.message);
-            return [];
-        }
-    }
-
     async function getReadme(repoInfo) {
         const endpoint = `https://api.github.com/repos/${repoInfo.organization}/${repoInfo.repository}/readme`;
 
@@ -187,12 +171,7 @@
             return contextCache.get(cacheKey);
         }
 
-        const rootFilesPromise = prefetched.rootFiles
-            ? Promise.resolve(prefetched.rootFiles)
-            : getRootFiles(repoInfo);
-
-        const [rootFiles, readme, latestRelease] = await Promise.all([
-            rootFilesPromise,
+        const [readme, latestRelease] = await Promise.all([
             getReadme(repoInfo),
             getLatestRelease(repoInfo)
         ]);
@@ -201,7 +180,7 @@
             repoInfo,
             repoData: prefetched.repoData,
             languages: prefetched.languages || {},
-            rootFiles,
+            rootFiles: prefetched.rootFiles || [],
             readme,
             latestRelease
         };
