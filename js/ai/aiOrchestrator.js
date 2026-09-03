@@ -145,11 +145,81 @@
             .join("\n");
     }
 
+    // ---- validation --------------------------------------------------------
+
+    function validateValue(field, value) {
+        const fail = (why) => ({ ok: false, why });
+
+        if (field.enum) {
+            const normalised = field.type === "integer" ? Number(value) : value;
+            return field.enum.includes(normalised)
+                ? { ok: true, value: normalised }
+                : fail(`"${value}" is not one of ${field.enum.join(", ")}`);
+        }
+
+        if (field.type === "array") {
+            if (!Array.isArray(value)) {
+                return fail("expected an array");
+            }
+
+            const allowed = field.items && field.items.enum;
+            const unique = [...new Set(value.map((entry) => String(entry).trim()).filter(Boolean))];
+
+            if (!allowed) {
+                return unique.length ? { ok: true, value: unique.slice(0, 8) } : fail("empty");
+            }
+
+            const kept = unique.filter((entry) => allowed.includes(entry));
+            const dropped = unique.filter((entry) => !allowed.includes(entry));
+
+            return kept.length
+                ? { ok: true, value: kept, dropped }
+                : fail("no valid options returned");
+        }
+
+        if (field.type === "boolean") {
+            if (typeof value === "boolean") {
+                return { ok: true, value };
+            }
+            if (value === "true" || value === "false") {
+                return { ok: true, value: value === "true" };
+            }
+            return fail("expected true or false");
+        }
+
+        if (field.type === "number" || field.type === "integer") {
+            const numeric = Number(value);
+            return Number.isFinite(numeric) ? { ok: true, value: numeric } : fail("not a number");
+        }
+
+        let text = String(value).replace(/\s+/g, " ").trim();
+
+        if (!text) {
+            return fail("empty");
+        }
+        if (field.format === "uri" && !/^https?:\/\//i.test(text)) {
+            return fail("not a URL");
+        }
+        if (field.format === "email" && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(text)) {
+            return fail("not an email address");
+        }
+        if (field.maxLength) {
+            text = text.slice(0, field.maxLength);
+        }
+
+        const warn = field.minLength && text.length < field.minLength
+            ? `below the ${field.minLength}-character minimum`
+            : undefined;
+
+        return { ok: true, value: text, warn };
+    }
+
     window.AIOrchestrator = {
         AI_FIELDS,
         NEVER_TOUCH,
         PUBLICCODE_CATEGORIES,
         schemaFor,
-        subSchemaFor
+        subSchemaFor,
+        validateValue
     };
 })();

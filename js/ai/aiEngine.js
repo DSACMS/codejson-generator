@@ -3,7 +3,7 @@
 
     const LIBRARY_URL = "https://esm.run/@mlc-ai/web-llm@0.2.84";
     const FALLBACK_LIBRARY_URL = "https://cdn.jsdelivr.net/npm/@mlc-ai/web-llm@0.2.84/+esm";
-    const CACHE_MARKER_KEY = "aiPrefill.cachedModel";
+    const CACHE_MARKER_KEY = "aiOrchestrator.cachedModel";
 
     const MODEL = {
         id: "Llama-3.2-1B-Instruct-q4f16_1-MLC",
