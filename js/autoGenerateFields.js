@@ -83,9 +83,14 @@ function setupFormHandler() {
 
             const repositoryInfo = await getRepoInformation(repoInfo);
             const languages = await getRepoLanguages(repoInfo)
+            const rootFiles = await getRepoRootFiles(repoInfo)
 
             if (repositoryInfo) {
-                preFillFields(repositoryInfo, languages);
+                await preFillFields(repositoryInfo, languages, rootFiles);
+
+                document.dispatchEvent(new CustomEvent("repo-context-ready", {
+                    detail: { repoInfo, repoData: repositoryInfo, languages, rootFiles }
+                }));
                 notificationSystem.success("Repository data loaded successfully!");
             } else {
                 throw new Error("Could not fetch repository information. Please check the URL and try again.");
@@ -116,15 +121,23 @@ function extractGitHubInfo(url) {
     return null;
 }
 
+function githubRequestOptions() {
+    return window.AIContext ? window.AIContext.ghHeaders() : {};
+}
+
 async function getRepoInformation(repoInfo) {
     const baseURL = "https://api.github.com/repos/";
     const endpoint = `${baseURL}${repoInfo.organization}/${repoInfo.repository}`;
 
     try {
-        const response = await fetch(endpoint);
+        const response = await fetch(endpoint, githubRequestOptions());
 
         if (!response.ok) {
             throw new Error(`GitHub API error (${response.status}): ${response.statusText}`);
+        }
+
+        if (window.AIContext) {
+            window.AIContext.checkRateLimit(response);
         }
 
         return await response.json();
@@ -137,7 +150,7 @@ async function getRepoLanguages(repoInfo) {
     const endpoint = `https://api.github.com/repos/${repoInfo.organization}/${repoInfo.repository}/languages`
 
     try {
-        const response = await fetch(endpoint);
+        const response = await fetch(endpoint, githubRequestOptions());
 
         if (!response.ok) {
             throw new Error(`GitHub API error (${response.status}): ${response.statusText}`);
@@ -149,16 +162,38 @@ async function getRepoLanguages(repoInfo) {
     }
 }
 
-async function getLicenseURL(repoURL) {
+// gives the strongest signal for softwareType and maturityModelTier.
+async function getRepoRootFiles(repoInfo) {
+    const endpoint = `https://api.github.com/repos/${repoInfo.organization}/${repoInfo.repository}/contents`
+
+    try {
+        const response = await fetch(endpoint, githubRequestOptions());
+
+        if (!response.ok) {
+            return []
+        }
+
+        const files = await response.json()
+        return Array.isArray(files) ? files : []
+    } catch (error) {
+        console.error("Fetch error:", error.message);
+        return []
+    }
+}
+
+// files is the already-fetched root listing, so this does not ask GitHub twice
+async function getLicenseURL(repoURL, files = null) {
     const urlParts = repoURL.replace('https://github.com/', '').split('/')
     const owner = urlParts[0]
     const repo = urlParts[1]
 
     try {
-        const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents`
-        const response = await fetch(apiUrl)
+        if (!files) {
+            const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents`
+            const response = await fetch(apiUrl, githubRequestOptions())
 
-        const files = await response.json()
+            files = await response.json()
+        }
 
         const licenseFile = files.find(file => {
             const fileName = file.name.toLowerCase()
@@ -177,7 +212,7 @@ async function getLicenseURL(repoURL) {
     }
 }
 
-async function preFillFields(repoData, languages) {
+async function preFillFields(repoData, languages, rootFiles) {
     if (!window.formIOInstance) {
         notificationSystem.error("Form interface not initialized. Please refresh and try again.");
         return;
@@ -231,7 +266,7 @@ async function preFillFields(repoData, languages) {
             const currentPermissions = permissionsComp.getValue() || {};
 
             currentPermissions.licenses = currentPermissions.licenses || [];
-            const licenseURL = await getLicenseURL(repoData.html_url)
+            const licenseURL = await getLicenseURL(repoData.html_url, rootFiles)
 
             const licenseObj = {
                 name: repoData.license.spdx_id,
