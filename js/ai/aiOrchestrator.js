@@ -70,6 +70,7 @@
     let busy = false;
     let modelAvailable = false;
     const attempted = new Set();
+    const CLEAR_CACHE_FLASH_MS = 1200;
 
     // ---- schema derivation -------------------------------------------------
 
@@ -557,6 +558,17 @@
         }
     }
 
+    function confirmDownload() {
+        if (window.AIEngine.isModelCached()) {
+            return true;
+        }
+
+        return window.confirm(
+            `This downloads the ${formatSize(window.AIEngine.MODEL.sizeMB)} AI model and runs it in this ` +
+            "tab. It's cached afterward so this only happens once. Continue?"
+        );
+    }
+
     async function run() {
         if (!remainingModelFields()) {
             attempted.clear();
@@ -567,6 +579,10 @@
                 "Your browser has less storage available than this model needs. " +
                 "Private/incognito windows cannot cache it - try a normal window."
             );
+            return;
+        }
+
+        if (!confirmDownload()) {
             return;
         }
 
@@ -677,7 +693,18 @@
             setStatus("Cancelling...");
         });
 
-        element("ai-clear-cache").addEventListener("click", async () => {
+        element("ai-clear-cache").addEventListener("click", async (event) => {
+            if (!window.AIEngine.isModelCached()) {
+                return;
+            }
+
+            if (!window.confirm(
+                "This deletes the cached AI model. You'll need to download it again " +
+                "next time you draft fields. Continue?"
+            )) {
+                return;
+            }
+
             await window.AIEngine.clearCache();
             updateRunButton();
         });
