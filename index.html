@@ -25,6 +25,13 @@
 	<script src="js/formDataToJson.js"></script>
 	<script src="js/exemptionQuizHandler.js"></script>
 	<script src="js/autoGenerateFields.js"></script>
+
+	<!-- In-browser AI field suggestions -->
+	<script src="js/ai/aiContext.js"></script>
+	<script src="js/ai/determinations.js"></script>
+	<script src="js/ai/aiEngine.js"></script>
+	<script src="js/ai/aiReviewPanel.js"></script>
+	<script src="js/ai/aiOrchestrator.js"></script>
 	
 	<!-- We participate in the US government's analytics program. See the data at analytics.usa.gov. -->
 	<script async type="text/javascript" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=HHS&subagency=CMS&sitetopic=metadata&siteplatform=GitHubPages" id="_fed_an_ua_tag"></script>
@@ -304,7 +311,49 @@
 			<label class="usa-label" for="repo-url">GitHub Repository URL</label>
 			<input class="usa-input" id="repo-url" name="repo-url" />
 			<button class="usa-button margin-top-2" id="repo-url-button">Submit</button>
+			<button class="usa-button usa-button--outline margin-top-2" type="button" id="ai-enhance"
+				style="display:none;">Enhance with AI</button>
 		</form>
+	</div>
+
+	<!-- AI Field Suggestions -->
+	<div class="auto-generation" id="ai-panel" style="display:none;">
+		<div class="auto-generation-header">
+			<div class="step-header">
+				<div class="step-number">2b</div>
+				<h2>Draft the remaining fields with AI</h2>
+			</div>
+			<h3 class="usa-heading margin-top-neg-05 margin-bottom-1">Llama 3.2 1B reads your
+				repository's README and drafts the fields that could not be worked out from the
+				repository metadata alone. It runs entirely on your computer so nothing is sent to
+				any server. The first run downloads about 880 MB and caches it for later visits, so keep
+				this tab open while it loads.</h3>
+		</div>
+
+		<div id="ai-controls">
+			<button class="usa-button margin-top-2" type="button" id="ai-run" disabled></button>
+			<button class="usa-button usa-button--outline margin-top-2" type="button" id="ai-cancel"
+				style="display:none;">Cancel</button>
+			<button class="usa-button usa-button--unstyled margin-top-2" type="button"
+				id="ai-clear-cache">Clear cached model files</button>
+		</div>
+
+		<div id="ai-progress-wrap" style="display:none;">
+			<label class="usa-label" for="ai-progress" id="ai-progress-label">Loading model</label>
+			<progress id="ai-progress" max="100" value="0" aria-labelledby="ai-progress-label"></progress>
+			<p class="usa-hint" id="ai-progress-text" aria-live="polite"></p>
+			<pre class="ai-stream" id="ai-stream" aria-live="polite"></pre>
+		</div>
+
+		<div id="ai-review" style="display:none;">
+			<h3 class="usa-heading margin-bottom-05">Review AI drafts</h3>
+			<p class="usa-hint margin-top-0">These are drafted by the model, not read from your
+				repository. Uncheck anything you do not want, edit the text, then apply.
+				<strong>Verify every value before you submit.</strong></p>
+			<fieldset class="usa-fieldset" id="ai-review-list"></fieldset>
+			<button class="usa-button margin-top-2" type="button" id="ai-apply">Apply selected to form</button>
+			<button class="usa-button usa-button--outline margin-top-2" type="button" id="ai-discard">Discard</button>
+		</div>
 	</div>
 
 	<!-- Form header -->

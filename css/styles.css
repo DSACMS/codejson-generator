@@ -67,3 +67,76 @@ textarea {
         transform: translateY(0);
     }
 }
+.ai-row {
+    padding: 8px 0;
+    border-bottom: 1px solid #dfe1e2;
+}
+
+.ai-value {
+    margin: 4px 0 0 2.5rem;
+    font-family: monospace;
+    color: #1b1b1b;
+}
+
+.ai-edit {
+    margin-left: 2.5rem;
+    max-width: 60rem;
+}
+
+.ai-note {
+    margin: 2px 0 0 2.5rem;
+    font-size: 13px;
+    color: #71767a;
+}
+
+.ai-warn {
+    color: #b50909;
+    font-size: 12px;
+    margin-left: 6px;
+}
+
+.ai-stream {
+    background: #f0f0f0;
+    padding: 8px;
+    max-height: 160px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    font-size: 13px;
+}
+
+#ai-progress {
+    width: 100%;
+    max-width: 1300px;
+    height: 18px;
+}
+
+.ai-reveal {
+    animation: slideDown 0.3s ease;
+}
+
+#ai-enhance {
+    margin-left: 8px;
+}
+
+.ai-options {
+    margin: 4px 0 0 2.5rem;
+}
+
+.ai-option {
+    display: inline-block;
+    margin-right: 16px;
+}
+
+.ai-edit.usa-select,
+.ai-edit.usa-input {
+    margin-left: 2.5rem;
+    max-width: 24rem;
+}
+
+.usa-button.ai-button--applied,
+.usa-button.ai-button--applied:hover,
+.usa-button.ai-button--applied:focus,
+.usa-button.ai-button--applied:active {
+    background-color: #00a91c;
+    pointer-events: none;
+}
