@@ -51,7 +51,8 @@ This works in two layers:
 
 Key things to know about this feature:
 
-- **Runs entirely client-side.** The model is downloaded once, cached in the browser, and run locally. No form data or repository content is sent to any Anthropic-style server, only the existing GitHub API calls used elsewhere in the form.
+- **Runs entirely client-side.** The model is downloaded once, cached in the browser, and run locally. No form data or repository content is sent to any external server, only the existing GitHub API calls used elsewhere in the form.
+
 - **Requires WebGPU.** If the browser doesn't support WebGPU (or no GPU adapter is available), the "Enhance with AI" option simply doesn't appear. This is a fallback, not an error state.
 - **Never overwrites existing or user-entered data.** The orchestrator only attempts to draft fields that are still empty, and some fields (URLs, labor hours, names, permissions, etc.) are explicitly excluded from AI suggestion entirely (see `NEVER_TOUCH` in `js/ai/aiOrchestrator.js`).
 - **Always goes through human review.** Drafted values are shown in a review panel where they can be edited or unchecked before anything is written into the form. Nothing is applied automatically.
