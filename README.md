@@ -1,12 +1,12 @@
 # codejson-generator
 
-Form to generate a CMS code.json
+Form to generate an agency code.json
 
 https://dsacms.github.io/codejson-generator/
 
 ## About the Project
 
-A web form where project teams fill out information about their project and creates a completed code.json for local download to add to repositories. [Form.io](https://github.com/formio/uswds) is used for form generation.
+A web form where project teams fill out information about their project and creates a completed code.json for local download to add to repositories. [Form.io](https://github.com/formio/uswds) is used for form generation. The form supports multiple agency-specific schemas and optional AI-assisted field drafting, see [Features](#features) below.
 
 https://dsacms.github.io/codejson-generator/
 
@@ -27,6 +27,40 @@ TODO: Good to include since this is an agency-led project -->
 <!--
 ### Team Mission
 TODO: Good to include since this is an agency-led project -->
+
+## Features
+
+### Agency-specific schemas
+
+The form can generate a code.json against more than one JSON schema. The schema used is selected with a `page` query parameter on the site URL:
+
+- `https://dsacms.github.io/codejson-generator/` (no parameter) loads the default, agency-agnostic schema at `schemas/gov/schema.json`
+- `https://dsacms.github.io/codejson-generator/?page=cms` loads a stricter, CMS-specific schema at `schemas/cms/schema.json`
+
+Currently, those are the only two schemas available. Under the hood, `?page=<name>` loads `schemas/<name>/schema.json`, and the project is built so that a maintainer can add a new schema for another agency by creating `schemas/<name>/schema.json`.
+
+### AI-assisted field drafting (WebLLM)
+
+Once a repository URL is submitted and the GitHub metadata has been pulled in, the form can optionally draft the fields that can't be reliably filled in from repository metadata alone (for example, `longDescription`, and a handful of classification fields like `status`, `softwareType`, or `maturityModelTier`).
+
+This works in two layers:
+
+1. **Rule based suggestions** (`js/ai/determinations.js`) run automatically and don't require any AI model. These infer values like development status, maturity tier, or platforms directly from things that are already present in the repository (release tags, root file listing, languages, etc.).
+
+1. **In-browser AI suggestions** (`js/ai/aiEngine.js`, `js/ai/aiOrchestrator.js`, `js/ai/aiContext.js`, `js/ai/aiReviewPanel.js`, `js/ai/webLLMWorker.js`) fill in any fields that are still empty after the rule-based pass. This uses WebLLM to run a small local model (Llama-3.2-1B-Instruct, ~880 MB) directly in the browser via WebGPU.
+
+Key things to know about this feature:
+
+- **Runs entirely client-side.** The model is downloaded once, cached in the browser, and run locally. No form data or repository content is sent to any external server, only the existing GitHub API calls used elsewhere in the form.
+
+- **Requires WebGPU.** If the browser doesn't support WebGPU (or no GPU adapter is available), the "Enhance with AI" option simply doesn't appear. This is a fallback, not an error state.
+- **Never overwrites existing or user-entered data.** The orchestrator only attempts to draft fields that are still empty, and some fields (URLs, labor hours, names, permissions, etc.) are explicitly excluded from AI suggestion entirely (see `NEVER_TOUCH` in `js/ai/aiOrchestrator.js`).
+- **Always goes through human review.** Drafted values are shown in a review panel where they can be edited or unchecked before anything is written into the form. Nothing is applied automatically.
+- **Caching.** The downloaded model is cached in the browser so it only needs to be fetched once; there's a "Clear cached model files" control if a user wants to remove it.
+
+## GitHub API Key field
+
+The form includes an optional "GitHub API Key" field. This is unrelated to the AI feature itself. It exists because the form makes several unauthenticated calls to the GitHub REST API (to fetch repo metadata, languages, root files, README contents, and latest release) while pre-filling fields and gathering context for AI drafting. Unauthenticated GitHub API requests are capped at 60 requests/hour per IP address; providing a personal access token raises that limit to 5,000/hour. The token is only used client-side for these GitHub API calls, and, if used, for creating a branch/PR back to the repository.
 
 ## Core Team
 
@@ -56,6 +90,7 @@ An up-to-date list of core team members can be found in [MAINTAINERS.md](MAINTAI
 .
 ├── css
 ├── js
+│   └── ai
 └── schemas
 ```
 
@@ -76,6 +111,8 @@ This form works with any JSON schema. To ingest a JSON schema:
 
 1. Add JSON schema to `schemas/`
 2. Update value of filePath variable in line 60 of `js/generateFormComponents.js`
+
+To test the AI field-drafting feature locally, you'll need a browser with WebGPU support (recent Chrome/Edge). The first run downloads the model (~880 MB), so keep the tab open until it finishes.
 
 ## Coding Style and Linters
 
